@@ -35,20 +35,23 @@ class Offers extends Controller
 
     public function createOffer(Request $request)
     {
-
         if ($request->isMethod('post')) {
             $validator = Validator::make($request->all(),  [
                 //'userId' => 'required|max:10',
-                'offer_type' => 'required|max:100',
-                'offer_cat' => 'required|max:200',
+                'offer_type' => 'required',
+                'offer_dis_type' => 'required',
+                'offer_cat' => 'required',
                 'offer_name' => 'required',
                 'offer_details' => 'required',
-                'offer_steps' => 'required|max:1000',
-                'offer_banner' => 'required|max:2048',
+                'offer_amount' => 'required',
+                'offer_package' => 'required',
+                'offer_steps' => 'required',
+                'offer_thumb' => 'required',
+                'offer_banner' => 'required',
                 'offer_url' => 'required',
                 'offer_os' => 'required',
-                'offer_origin' => 'required||max:100',
-                'offer_cap' => 'required|max:200',
+                'offer_origin' => 'required',
+                'offer_cap' => 'required',
                 'fall_url' => 'required',
                 'start_from' => 'required',
                 'ends_on' => 'required',
@@ -56,23 +59,37 @@ class Offers extends Controller
                 'offer_app' => 'required',
                 //'offer_steps' => 'required',
             ]);
-            $params = $request->all();
+
             if ($validator->fails()) {
                 return redirect('createOffer')
                     ->withErrors($validator)
                     ->withInput();
             }
-            $imageName = time() . '.' . $request->offer_banner->extension();
-            $request->offer_banner->move(public_path('images'), $imageName);
-            $offerSteps = json_encode($request->offer_steps);
+            $offerSteps = $request->offer_steps;
+            $sub_key = 'offerSteps';
+            $new_Steps_array = [];
+            foreach ($offerSteps as $value) {
+                $new_Steps_array[] = [$sub_key => $value];
+                
+            }
+            
+            $imageName = time() . 'banner.' . $request->offer_banner->extension();
+            $request->offer_banner->move(public_path('images/banner'), $imageName);
             $path =  $imageName;
-            $creteOffer = Offer::create([
+
+            $imageTumbName = time() . 'thumb.' . $request->offer_thumb->extension();
+            $request->offer_thumb->move(public_path('images/thumb'), $imageTumbName);
+            $tumbPath =  $imageTumbName;
+            $offerData = [
                 'OFFER_TYPE' => $request->offer_type,
+                'OFFER_DISPLAY_TYPE' => $request->offer_dis_type,
                 'OFFER_CATEGORY' => $request->offer_cat,
                 'OFFER_NAME' => $request->offer_name,
                 'OFFER_DETAILS' => $request->offer_details,
-                'OFFER_STEPS' => $offerSteps,
-                'OFFER_THUMBNAIL' => $request->offer_type,
+                'OFFER_AMOUNT' => $request->offer_amount,
+                'OFFER_PACKAGE' => $request->offer_package,
+                'OFFER_STEPS' => $new_Steps_array,
+                'OFFER_THUMBNAIL' => $tumbPath,
                 'OFFER_BANNER' => $path,
                 'OFFER_URL' => $request->offer_url,
                 'OFFER_OS' => $request->offer_os,
@@ -85,16 +102,29 @@ class Offers extends Controller
                 'OFFER_APP' => $request->offer_app,
                 'CREATED_BY' => Auth::user()->name,
                 'CREATED_AT' => date('Y-m-d H:i:s'),
-            ]);
-
-            if ($creteOffer) {
-                return redirect()->back()->withSuccess('Successfully Created !');
+            ];
+            if (empty($request->editType)) {
+                $creteOffer = Offer::create($offerData);
+                if ($creteOffer) {
+                    return redirect()->back()->withSuccess('Successfully Created !');
+                } else {
+                    return view('createOffer');
+                }
+            } elseif (!empty($request->editType) && !empty($request->offerId) && $request->editType == "edit") { //edit section
+                $updateOffer = Offer::where('OFFER_ID', $request->offerId)->update($offerData);
+                if ($updateOffer) {
+                    return redirect()->back()->withSuccess('Successfully Update !');
+                } else {
+                    return view('createOffer');
+                }
+            }
+        } else {
+            if (!empty($request->type) && $request->type == "edit") {
+                $offerData = DB::table('offer')->where('OFFER_ID', $request->offerId)->orderBy('OFFER_ID', 'desc')->first();
+                return view('createOffer', ['offerData' => $offerData, 'type' => $request->type]);
             } else {
                 return view('createOffer');
             }
-            
-        } else {
-            return view('createOffer');
         }
     }
 }
