@@ -55,20 +55,28 @@
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
+                                                <th>Sl No.</th>
                                                 <th>Type</th>
+                                                <th>Display Type</th>
                                                 <th>Ctegory</th>
-                                                <th>Nmae</th>
+                                                <th>Name</th>
                                                 <th>Details</th>
                                                 <th>Steps</th>
+                                                <th>Amount</th>
+                                                <th>Package</th>
                                                 <th>Thumbnail</th>
                                                 <th>Banner</th>
                                                 <th>Url</th>
                                                 <th>Os</th>
+                                                <th>Origin</th>
                                                 <th>Cap</th>
+                                                <th>Fallback</th>
                                                 <th>Start</th>
                                                 <th>End</th>
                                                 <th>Status</th>
+                                                <th>Off App</th>
                                                 <th>Date</th>
+                                                <th>Action</th>
 
                                             </tr>
                                         </thead>
@@ -76,40 +84,127 @@
                                             @if(!empty($promodata))
                                             @foreach($promodata as $promodata)
                                             <tr>
-                                                <td>{{ $promodata->OFFER_TYPE }} </td>
-                                                <td>{{ $promodata->OFFER_CATEGORY }}</td>
+                                                <td>{{ $loop->iteration }} </td>
+                                                @if($promodata->OFFER_TYPE == 1)
+                                                <td>Install</td>
+                                                @elseif($promodata->OFFER_TYPE == 2)
+                                                <td>Register</td>
+                                                @elseif($promodata->OFFER_TYPE == 3)
+                                                <td>Subscription</td>
+                                                @elseif($promodata->OFFER_TYPE == 4)
+                                                <td>View</td>
+                                                @else
+                                                <td>Null</td>
+                                                @endif
+
+                                                @if($promodata->OFFER_DISPLAY_TYPE == 1)
+                                                <td>All</td>
+                                                @elseif($promodata->OFFER_DISPLAY_TYPE == 2)
+                                                <td>Recomended</td>
+                                                @elseif($promodata->OFFER_DISPLAY_TYPE == 3)
+                                                <td>Hot</td>
+                                                @elseif($promodata->OFFER_DISPLAY_TYPE == 4)
+                                                <td>Special</td>
+                                                @elseif($promodata->OFFER_DISPLAY_TYPE == 4)
+                                                <td>Oth</td>
+                                                @else
+                                                <td>Null</td>
+                                                @endif
+
+                                                @if($promodata->OFFER_CATEGORY == 1)
+                                                <td>CPI</td>
+                                                @elseif($promodata->OFFER_CATEGORY == 2)
+                                                <td>SALE</td>
+                                                @elseif($promodata->OFFER_CATEGORY == 3)
+                                                <td>SURVEY</td>
+                                                @else
+                                                <td>Null</td>
+                                                @endif
+
                                                 <td>{{ $promodata->OFFER_NAME }}</td>
                                                 <td>{{ $promodata->OFFER_DETAILS }}</td>
                                                 <td>{{ $promodata->OFFER_STEPS }}</td>
-                                                <td>{{ $promodata->OFFER_THUMBNAIL }}</td>
-                                                <td><img style="height:50px; width:100px" src="{{url('images/'.$promodata->OFFER_BANNER)}}"></td>
+                                                <td>{{ $promodata->OFFER_AMOUNT }}</td>
+                                                <td>{{ $promodata->OFFER_PACKAGE }}</td>
+                                                <td><img style="height:50px; width:100px" src="{{url('images/thumb/'.$promodata->OFFER_THUMBNAIL)}}"></td>
+                                                <td><img style="height:50px; width:100px" src="{{url('images/banner/'.$promodata->OFFER_BANNER)}}"></td>
                                                 <td>{{ $promodata->OFFER_URL }}</td>
-                                                <td>{{ $promodata->OFFER_OS }}</td>
+
+                                                @if($promodata->OFFER_OS == 1)
+                                                <td>Android</td>
+                                                @elseif($promodata->OFFER_OS == 2)
+                                                <td>Ios</td>
+                                                @elseif($promodata->OFFER_OS == 3)
+                                                <td>Web</td>
+                                                @else
+                                                <td>Null</td>
+                                                @endif
+
+                                                @if($promodata->OFFER_ORIGIN == 1)
+                                                <td>All</td>
+                                                @elseif($promodata->OFFER_ORIGIN == 2)
+                                                <td>India</td>
+                                                @elseif($promodata->OFFER_ORIGIN == 3)
+                                                <td>Internal</td>
+                                                @else
+                                                <td>Null</td>
+                                                @endif
+
+
+
                                                 <td>{{ $promodata->CAP }}</td>
+                                                <td>{{ $promodata->FALLBACK_URL }}</td>
                                                 <td>{{ $promodata->STARTS_FROM }}</td>
                                                 <td>{{ $promodata->ENDS_ON }}</td>
-                                                <td>{{ $promodata->STATUS }}</td>
+
+                                                @if($promodata->STATUS == 1)
+                                                <td><button type="button" class="btn btn-block btn-success btn-sm">Active</button></td>
+                                                @elseif($promodata->STATUS == 2)
+                                                <td><button type="button" class="btn btn-block btn-danger btn-sm">Inactive</button></td>
+                                                @elseif($promodata->STATUS == 3)
+                                                <td><button type="button" class="btn btn-block btn-danger btn-sm">Deleted</button></td>
+                                                @else
+                                                <td>Null</td>
+                                                @endif
+
+                                                @if($promodata->OFFER_APP == 1)
+                                                <td>All</td>
+                                                @elseif($promodata->OFFER_APP == 2)
+                                                <td>Domain</td>
+                                                @else
+                                                <td>Null</td>
+                                                @endif
+
                                                 <td>{{ $promodata->CREATED_AT }}</td>
+                                                <td><a href="{{ route('createOffer') }}?type=edit&offerId={{ $promodata->OFFER_ID }}" class="btn btn-app"><i class="fas fa-edit"></i> Edit</a></td>
                                             </tr>
                                             @endforeach
                                             @endif
                                         </tbody>
                                         <tfoot>
                                             <tr>
+                                                <th>Sl No.</th>
                                                 <th>Type</th>
+                                                <th>Display Type</th>
                                                 <th>Ctegory</th>
-                                                <th>Nmae</th>
+                                                <th>Name</th>
                                                 <th>Details</th>
                                                 <th>Steps</th>
+                                                <th>Amount</th>
+                                                <th>Package</th>
                                                 <th>Thumbnail</th>
                                                 <th>Banner</th>
                                                 <th>Url</th>
                                                 <th>Os</th>
+                                                <th>Origin</th>
                                                 <th>Cap</th>
+                                                <th>Fallback</th>
                                                 <th>Start</th>
                                                 <th>End</th>
                                                 <th>Status</th>
+                                                <th>Off App</th>
                                                 <th>Date</th>
+                                                <th>Action</th>
                                             </tr>
                                         </tfoot>
                                     </table>
@@ -164,20 +259,19 @@
     <script>
         $(function() {
             $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": true,
-                "autoWidth": true,
+
+                "scrollX": true,
                 "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-            });
+            // $('#example2').DataTable({
+            //     "paging": true,
+            //     "lengthChange": false,
+            //     "searching": false,
+            //     "ordering": true,
+            //     "info": true,
+            //     "autoWidth": false,
+            //     "responsive": true,
+            // });
         });
     </script>
 </body>
