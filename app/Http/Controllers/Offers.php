@@ -88,7 +88,7 @@ class Offers extends Controller
                 'OFFER_DETAILS' => $request->offer_details,
                 'OFFER_AMOUNT' => $request->offer_amount,
                 'OFFER_PACKAGE' => $request->offer_package,
-                'OFFER_STEPS' => $new_Steps_array,
+                'OFFER_STEPS' => json_encode($new_Steps_array),
                 'OFFER_THUMBNAIL' => $tumbPath,
                 'OFFER_BANNER' => $path,
                 'OFFER_URL' => $request->offer_url,
