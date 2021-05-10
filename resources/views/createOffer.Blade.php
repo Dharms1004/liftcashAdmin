@@ -111,19 +111,19 @@
 
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Offer Name</label>
-                                            <input type="text" name="offer_name" value="{{ old('offer_name') }} {{ !empty($offerData->OFFER_NAME) ? $offerData->OFFER_NAME : ''  }}" class="form-control" i placeholder="Offer Name">
+                                            <input type="text" name="offer_name" value="@if(!empty(old('offer_name'))) {{ old('offer_name') }} @else {{ !empty($offerData->OFFER_NAME) ? $offerData->OFFER_NAME : ''  }} @endif" class="form-control" i placeholder="Offer Name">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Offer Details</label>
-                                            <input type="text" name="offer_details" value="{{ old('offer_details') }} {{ !empty($offerData->OFFER_DETAILS) ? $offerData->OFFER_DETAILS : ''  }}" class="form-control" i placeholder="Offer Details">
+                                            <input type="text" name="offer_details" value=" @if(!empty(old('offer_details'))) {{ old('offer_details') }} @else {{ !empty($offerData->OFFER_DETAILS) ? $offerData->OFFER_DETAILS : ''  }} @endif" class="form-control" i placeholder="Offer Details">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Offer Amount</label>
-                                            <input type="text" name="offer_amount" value="{{ old('offer_amount') }} {{ !empty($offerData->OFFER_AMOUNT) ? $offerData->OFFER_AMOUNT : ''  }}" class="form-control" i placeholder="Offer Amount">
+                                            <input type="text" name="offer_amount" value="@if(!empty(old('offer_amount'))) {{ old('offer_amount') }} @else{{ !empty($offerData->OFFER_AMOUNT) ? $offerData->OFFER_AMOUNT : ''  }} @endif" class="form-control" i placeholder="Offer Amount">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Offer Package</label>
-                                            <input type="text" name="offer_package" value="{{ old('offer_package') }} {{ !empty($offerData->OFFER_PACKAGE) ? $offerData->OFFER_PACKAGE : ''  }}" class="form-control" i placeholder="Offer Package">
+                                            <input type="text" name="offer_package" value="@if(!empty(old('offer_package')))  {{ old('offer_package') }} @else {{ !empty($offerData->OFFER_PACKAGE) ? $offerData->OFFER_PACKAGE : ''  }} @endif" class="form-control" i placeholder="Offer Package">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputFile">Offer Thumbnail</label>
@@ -152,15 +152,15 @@
 
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Offer Url</label>
-                                            <input type="text" name="offer_url" value="{{ old('offer_url') }} {{ !empty($offerData->OFFER_URL) ? $offerData->OFFER_URL : ''  }}" class="form-control" i placeholder="Offer Url">
+                                            <input type="text" name="offer_url" value="@if(!empty(old('offer_url')))  {{ old('offer_url') }} @else {{ !empty($offerData->OFFER_URL) ? $offerData->OFFER_URL : ''  }} @endif" class="form-control" i placeholder="Offer Url">
                                         </div>
                                         <div class="form-group">
                                             <label>Offer Os</label>
                                             <select name="offer_os" class="form-control select2 select2-danger select2-hidden-accessible" data-dropdown-css-class="select2-danger" style="width: 100%;" data-select2-id="12" tabindex="-1" aria-hidden="true">
                                                 <option selected="selected" data-select2-id="14">Select</option>
-                                                <option value="0" {{ !empty(old('offer_os')) ? old('offer_os') == 1 ? "selected" : ''  : ''  }} {{ !empty($offerData->OFFER_OS) ? $offerData->OFFER_OS == 1 ? "selected" : ''  : ''  }}>Android</option>
-                                                <option value="1" {{ !empty(old('offer_os')) ? old('offer_os') == 2 ? "selected" : ''  : ''  }} {{ !empty($offerData->OFFER_OS) ? $offerData->OFFER_OS == 2 ? "selected" : ''  : ''  }}>Ios</option>
-                                                <option value="2" {{ !empty(old('offer_os')) ? old('offer_os') == 3 ? "selected" : ''  : ''  }} {{ !empty($offerData->OFFER_OS) ? $offerData->OFFER_OS == 3 ? "selected" : ''  : ''  }}>Web</option>
+                                                <option value="1" {{ !empty(old('offer_os')) ? old('offer_os') == 1 ? "selected" : ''  : ''  }} {{ !empty($offerData->OFFER_OS) ? $offerData->OFFER_OS == 1 ? "selected" : ''  : ''  }}>Android</option>
+                                                <option value="2" {{ !empty(old('offer_os')) ? old('offer_os') == 2 ? "selected" : ''  : ''  }} {{ !empty($offerData->OFFER_OS) ? $offerData->OFFER_OS == 2 ? "selected" : ''  : ''  }}>Ios</option>
+                                                <option value="3" {{ !empty(old('offer_os')) ? old('offer_os') == 3 ? "selected" : ''  : ''  }} {{ !empty($offerData->OFFER_OS) ? $offerData->OFFER_OS == 3 ? "selected" : ''  : ''  }}>Web</option>
 
                                             </select>
                                         </div>
@@ -176,19 +176,19 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Offer Cap</label>
-                                            <input type="text" name="offer_cap" value="{{ old('offer_cap') }} {{ !empty($offerData->CAP) ? $offerData->CAP : ''  }}" class="form-control" i placeholder="Offer Cap">
+                                            <input type="text" name="offer_cap" value=" @if(!empty(old('offer_package'))) {{ old('offer_cap') }} @else {{ !empty($offerData->CAP) ? $offerData->CAP : ''  }} @endif" class="form-control" i placeholder="Offer Cap">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Fall Back Url</label>
-                                            <input type="text" name="fall_url" value="{{ old('fall_url') }} {{ !empty($offerData->FALLBACK_URL) ? $offerData->FALLBACK_URL : ''  }}" class="form-control" i placeholder="Fall Back Url">
+                                            <input type="text" name="fall_url" value="@if(!empty(old('fall_url')))  {{ old('fall_url') }} @else {{ !empty($offerData->FALLBACK_URL) ? $offerData->FALLBACK_URL : ''  }} @endif" class="form-control" i placeholder="Fall Back Url">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Start From</label>
-                                            <input type="date" name="start_from" value="{{ old('start_from') }} {{ !empty($offerData->STARTS_FROM) ? $offerData->STARTS_FROM : ''  }}" class="form-control" i placeholder="Start from">
+                                            <input type="date" name="start_from" value="@if(!empty(old('start_from'))) {{ date("YYYY-dd-mm", strtotime(old('start_from'))) }}@else{{!empty($offerData->STARTS_FROM)?date_format(date_create($offerData->STARTS_FROM),"Y-m-d"):''}}@endif" class="form-control" i placeholder="Start from">
                                         </div>
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Ends On</label>
-                                            <input type="date" name="ends_on" value="{{ old('ends_on') }} {{ !empty($offerData->ENDS_ON) ? $offerData->ENDS_ON : ''  }}" class="form-control" i placeholder="Ends On">
+                                            <input type="date" name="ends_on" value="@if(!empty(old('ends_on'))) {{ date("YYYY-dd-mm", strtotime(old('ends_on'))) }}@else{{!empty($offerData->ENDS_ON)?date_format(date_create($offerData->ENDS_ON),"Y-m-d"):''}}@endif" class="form-control" i placeholder="Ends On">
                                         </div>
                                         <!-- <div class="form-check">
                                             <input type="checkbox" class="form-check-input" id="exampleCheck1">
