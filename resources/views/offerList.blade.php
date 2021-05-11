@@ -158,9 +158,9 @@
                                                 <td>{{ $promodata->ENDS_ON }}</td>
 
                                                 @if($promodata->STATUS == 1)
-                                                <td><button type="button" class="btn btn-block btn-success btn-sm">Active</button></td>
+                                                <td><button type="button" data-offer-id="{{ $promodata->OFFER_ID }}" class="btn btn-block btn-success btn-sm">Active</button></td>
                                                 @elseif($promodata->STATUS == 2)
-                                                <td><button type="button" class="btn btn-block btn-danger btn-sm">Inactive</button></td>
+                                                <td><button type="button" data-offer-id="{{ $promodata->OFFER_ID }}" class="btn btn-block btn-danger btn-sm">Inactive</button></td>
                                                 @elseif($promodata->STATUS == 3)
                                                 <td><button type="button" class="btn btn-block btn-danger btn-sm">Deleted</button></td>
                                                 @else
@@ -273,6 +273,30 @@
             //     "responsive": true,
             // });
         });
+
+
+        jQuery(document).ready(function(){
+            jQuery('.btn-block').click(function(e){
+               e.preventDefault();
+               var offer_id=$(this).attr("data-offer-id");
+            //    $.ajaxSetup({
+            //       headers: {
+            //           'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            //       }
+            //   });
+               jQuery.ajax({
+                  url: "{{ url('/updateOfferStatus') }}",
+                  method: 'post',
+                  data: {
+                    "_token": "{{ csrf_token() }}",
+                    offer_id: offer_id,
+                     
+                  },
+                  success: function(result){
+                    location.reload();
+                  }});
+               });
+            });
     </script>
 </body>
 
