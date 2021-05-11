@@ -24,3 +24,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/offerList', [App\Http\Controllers\Offers::class, 'offerList'])->name('offerList');
 Route::get('/createOffer', [App\Http\Controllers\Offers::class, 'createOffer'])->name('createOffer');
 Route::post('/createOffer', [App\Http\Controllers\Offers::class, 'createOffer'])->name('createOffer');
+Route::post('/updateOfferStatus', [App\Http\Controllers\Offers::class, 'updateOfferStatus'])->name('updateOfferStatus');

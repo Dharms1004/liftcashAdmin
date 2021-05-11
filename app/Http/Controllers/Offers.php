@@ -169,4 +169,19 @@ class Offers extends Controller
             }
         }
     }
+
+
+    public function updateOfferStatus(Request $request){
+        $offerData = DB::table('offer')->where('OFFER_ID', $request->offer_id)->orderBy('OFFER_ID', 'desc')->first();
+        if($offerData->STATUS==1){
+            $status=2;
+        }else if($offerData->STATUS==2){
+            $status=1;
+        }else{
+            $status=3;
+        }
+        
+        $updateOffer = Offer::where('OFFER_ID', $request->offer_id)->update(['STATUS' =>$status]);
+        return $updateOffer;
+    }
 }
