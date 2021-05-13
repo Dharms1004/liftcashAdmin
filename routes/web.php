@@ -27,3 +27,6 @@ Route::post('/createOffer', [App\Http\Controllers\Offers::class, 'createOffer'])
 Route::post('/updateOfferStatus', [App\Http\Controllers\Offers::class, 'updateOfferStatus'])->name('updateOfferStatus');
 Route::get('/withdraw-list', [App\Http\Controllers\Withdraw::class, 'withdrawList'])->name('withdraw-list');
 Route::post('/witdrawApprove', [App\Http\Controllers\Withdraw::class, 'witdrawApprove'])->name('updateOfferStatus');
+
+Route::get('/user-list', [App\Http\Controllers\UserList::class, 'getAllUser'])->name('user-list');
+Route::post('/getUserDetails', [App\Http\Controllers\UserList::class, 'getUserDetails'])->name('getUserDetails');
