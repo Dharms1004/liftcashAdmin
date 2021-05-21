@@ -58,7 +58,7 @@ class Offers extends Controller
                 'ends_on' => 'required',
                 'status' => 'required',
                 'offer_app' => 'required',
-                //'offer_steps' => 'required',
+                'offer_ins' => 'required',
             ]);
 
             if ($validator->fails()) {
@@ -113,6 +113,7 @@ class Offers extends Controller
                     'OFFER_ORIGIN' => $request->offer_origin,
                     'CAP' => $request->offer_cap,
                     'FALLBACK_URL' => $request->fall_url,
+                    'OFFER_INSTRUCTIONS' => $request->offer_ins,
                     'STARTS_FROM' => $request->start_from,
                     'ENDS_ON' => $request->ends_on,
                     'STATUS' => $request->status,
@@ -137,6 +138,7 @@ class Offers extends Controller
                     'OFFER_ORIGIN' => $request->offer_origin,
                     'CAP' => $request->offer_cap,
                     'FALLBACK_URL' => $request->fall_url,
+                    'OFFER_INSTRUCTIONS' => $request->offer_ins,
                     'STARTS_FROM' => $request->start_from,
                     'ENDS_ON' => $request->ends_on,
                     'STATUS' => $request->status,
@@ -145,6 +147,8 @@ class Offers extends Controller
                     'CREATED_AT' => date('Y-m-d H:i:s'),
                 ];
             }
+
+            
             if (empty($request->editType)) {
                 $creteOffer = Offer::create($offerData);
                 if ($creteOffer) {

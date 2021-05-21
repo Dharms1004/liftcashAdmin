@@ -75,6 +75,7 @@
                                                 <th>End</th>
                                                 <th>Status</th>
                                                 <th>Off App</th>
+                                                <th>Instruction</th>
                                                 <th>Date</th>
                                                 <th>Action</th>
 
@@ -174,14 +175,14 @@
                                                 @else
                                                 <td>Null</td>
                                                 @endif
-
+                                                <td>{{ $promodata->OFFER_INSTRUCTIONS }}</td>
                                                 <td>{{ $promodata->CREATED_AT }}</td>
                                                 <td><a href="{{ route('createOffer') }}?type=edit&offerId={{ $promodata->OFFER_ID }}" class="btn btn-app"><i class="fas fa-edit"></i> Edit</a></td>
                                             </tr>
                                             @endforeach
                                             @endif
                                         </tbody>
-                                        <tfoot>
+                                        <!-- <tfoot>
                                             <tr>
                                                 <th>Sl No.</th>
                                                 <th>Type</th>
@@ -206,7 +207,7 @@
                                                 <th>Date</th>
                                                 <th>Action</th>
                                             </tr>
-                                        </tfoot>
+                                        </tfoot> -->
                                     </table>
 
                                 </div>
