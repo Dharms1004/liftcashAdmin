@@ -93,7 +93,8 @@
                                                 <option value="2" {{ !empty(old('offer_dis_type')) ? old('offer_dis_type') == 2 ? "selected" : ''  : ''  }} {{ !empty($offerData->OFFER_DISPLAY_TYPE) ? $offerData->OFFER_DISPLAY_TYPE == 2 ? "selected" : ''  : ''  }}>Recomended</option>
                                                 <option value="3" {{ !empty(old('offer_dis_type')) ? old('offer_dis_type') == 3 ? "selected" : ''  : ''  }} {{ !empty($offerData->OFFER_DISPLAY_TYPE) ? $offerData->OFFER_DISPLAY_TYPE == 3 ? "selected" : ''  : ''  }}>Hot</option>
                                                 <option value="4" {{ !empty(old('offer_dis_type')) ? old('offer_dis_type') == 4 ? "selected" : ''  : ''  }} {{ !empty($offerData->OFFER_DISPLAY_TYPE) ? $offerData->OFFER_DISPLAY_TYPE == 4 ? "selected" : ''  : ''  }}>Special</option>
-                                                <option value="4" {{ !empty(old('offer_dis_type')) ? old('offer_dis_type') == 5 ? "selected" : ''  : ''  }} {{ !empty($offerData->OFFER_DISPLAY_TYPE) ? $offerData->OFFER_DISPLAY_TYPE == 5 ? "selected" : ''  : ''  }}>Other</option>
+                                                <option value="5" {{ !empty(old('offer_dis_type')) ? old('offer_dis_type') == 5 ? "selected" : ''  : ''  }} {{ !empty($offerData->OFFER_DISPLAY_TYPE) ? $offerData->OFFER_DISPLAY_TYPE == 5 ? "selected" : ''  : ''  }}>Other</option>
+                                                <option value="6" {{ !empty(old('offer_dis_type')) ? old('offer_dis_type') == 5 ? "selected" : ''  : ''  }} {{ !empty($offerData->OFFER_DISPLAY_TYPE) ? $offerData->OFFER_DISPLAY_TYPE == 6 ? "selected" : ''  : ''  }}>Sale</option>
                                             </select>
                                         </div>
 
@@ -104,6 +105,8 @@
                                                 <option value="1" {{ !empty(old('offer_cat')) ? old('offer_cat') == 1 ? "selected" : ''  : ''  }} {{ !empty($offerData->OFFER_CATEGORY) ? $offerData->OFFER_CATEGORY == 1 ? "selected" : ''  : ''  }}>Cpi</option>
                                                 <option value="2" {{ !empty(old('offer_cat')) ? old('offer_cat') == 2 ? "selected" : ''  : ''  }} {{ !empty($offerData->OFFER_CATEGORY) ? $offerData->OFFER_CATEGORY == 2 ? "selected" : ''  : ''  }}>Sale</option>
                                                 <option value="3" {{ !empty(old('offer_cat')) ? old('offer_cat') == 3 ? "selected" : ''  : ''  }} {{ !empty($offerData->OFFER_CATEGORY) ? $offerData->OFFER_CATEGORY == 3 ? "selected" : ''  : ''  }}>Survey</option>
+                                                <option value="4" {{ !empty(old('offer_cat')) ? old('offer_cat') == 4 ? "selected" : ''  : ''  }} {{ !empty($offerData->OFFER_CATEGORY) ? $offerData->OFFER_CATEGORY == 4 ? "selected" : ''  : ''  }}>Cps</option>
+                                                <option value="5" {{ !empty(old('offer_cat')) ? old('offer_cat') == 5 ? "selected" : ''  : ''  }} {{ !empty($offerData->OFFER_CATEGORY) ? $offerData->OFFER_CATEGORY == 5 ? "selected" : ''  : ''  }}>Cpl</option>
 
                                             </select>
 
@@ -213,6 +216,10 @@
 
 
                                             </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Offer Instruction</label>
+                                            <input type="text" name="offer_ins" value="@if(!empty(old('offer_ins')))  {{ old('offer_ins') }} @else {{ !empty($offerData->OFFER_INSTRUCTIONS) ? $offerData->OFFER_INSTRUCTIONS : ''  }} @endif" class="form-control" i placeholder="Offer Instruction">
                                         </div>
                                         <div class="form-group" id="wrap-input">
                                             <label for="example-select">Offer Steps</label>
