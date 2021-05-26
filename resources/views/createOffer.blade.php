@@ -223,15 +223,23 @@
                                         </div>
                                         <div class="form-group" id="wrap-input">
                                             <label for="example-select">Offer Steps</label>
+                                            @if(!empty($offerData->OFFER_STEPS))
+                                            @foreach(json_decode($offerData->OFFER_STEPS) as $offerSteps)
+                                            <div class="input-group "><input name="offer_steps[]" type="text" class="form-control username" value="{{ str_replace('offerSteps":"', '',$offerSteps->offerSteps) }}" placeholder="Ex. Steps@#100" aria-label="Offer Steps" required>
+                                                <div class="input-group-append"><button type="button" id="add_field_button" class="btn btn-blue btn-xs waves-effect waves-light mr-1"><i class="fa fa-plus"></i> </button>
+                                                </div>
+                                            </div>&nbsp
+                                            @endforeach
+                                            @else
                                             <div class="input-group "><input name="offer_steps[]" type="text" class="form-control username" value="" placeholder="Ex. Steps@#100" aria-label="Offer Steps" required>
                                                 <div class="input-group-append"><button type="button" id="add_field_button" class="btn btn-blue btn-xs waves-effect waves-light mr-1"><i class="fa fa-plus"></i> </button>
                                                 </div>
 
                                             </div>&nbsp
-                                            @if(!empty($offerData->OFFER_STEPS))
-                                            <dv>{{ $offerData->OFFER_STEPS }}
-                                        </div>
-                                        @endif
+                                            @endif
+                                            </div>
+                                            
+                                        
                                     </div>
 
                             </div>

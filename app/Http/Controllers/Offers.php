@@ -53,7 +53,7 @@ class Offers extends Controller
                 'offer_os' => 'required',
                 'offer_origin' => 'required',
                 'offer_cap' => 'required',
-                'fall_url' => 'required',
+               // 'fall_url' => 'required',
                 'start_from' => 'required',
                 'ends_on' => 'required',
                 'status' => 'required',
