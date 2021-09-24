@@ -1,5 +1,13 @@
 @extends('common.head')
 
+<style>
+
+.w-5{
+    display: none;
+}
+
+</style>
+
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
         <!-- Navbar -->
@@ -55,9 +63,9 @@
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th>Sl No.</th>
-                                                <td>Phone</td>
-                                                <th>NSocial Email</th>
+                                                <th>S No.</th>
+                                                <th>Phone</th>
+                                                <th>Social Email</th>
                                                 <th>Device Type</th>
                                                 <th>Device Name</th>
                                                 <th>Social Type</th>
@@ -73,8 +81,8 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @if(!empty($userData))
-                                            @foreach($userData as $userData)
+                                            @if(!empty($userDatas))
+                                            @foreach($userDatas as $userData)
                                             <tr>
                                                 <td>{{ $loop->iteration }} </td>
                                                 <td>{{ $userData->PHONE }}</td>
@@ -94,29 +102,23 @@
                                             </tr>
                                             @endforeach
                                             @endif
+
                                         </tbody>
-                                        <!-- <tfoot>
-                                            <tr>
-                                                <th>Sl No.</th>
-                                                <th>Name</th>
-                                                <th>Balance Type</th>
-                                                <th>Status</th>
-                                                <th>Type</th>
-                                                <th>Payout Coin</th>
-                                                <th>Payout Email</th>
-                                                <th>Pay Mode</th>
-                                                <th>Date</th>
-                                                <th>Internal Refference No</th>
-                                                <th>Payout No</th>
-                                                <th>Current Tot Bal</th>
-                                                <th>Closing Tot Bal</th>
-                                            </tr>
-                                        </tfoot> -->
                                     </table>
-                                    <div class="card-footer">
-                                        <button style="display:none" type="submit" id="withdraw_approve" class="btn btn-info">Approve</button>
-                                        <button style="display:none" id="withdraw_approve_loader" class="btn btn-info">Processing..</button>
+                                    <div>
                                     </div>
+                                    {{-- <div class="card-footer"> --}}
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-6"></div>
+                                            <div class="col-sm-12 col-md-6">
+
+                                                {{ $userDatas->render("pagination::default") }}
+                                            </div>
+
+                                        </div>
+                                        {{-- <button style="display:none" type="submit" id="withdraw_approve" class="btn btn-info">Approve</button>
+                                        <button style="display:none" id="withdraw_approve_loader" class="btn btn-info">Processing..</button> --}}
+                                    {{-- </div> --}}
 
                                 </div>
                                 <!-- /.card-body -->

@@ -10,7 +10,7 @@
     </div>
 
     <!-- SidebarSearch Form -->
-    <div class="form-inline">
+    {{-- <div class="form-inline">
         <div class="input-group" data-widget="sidebar-search">
             <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
             <div class="input-group-append">
@@ -19,7 +19,7 @@
                 </button>
             </div>
         </div>
-    </div>
+    </div> --}}
 
     <!-- Sidebar Menu -->
     <nav class="mt-2">
@@ -27,7 +27,7 @@
             <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
             <li class="nav-item menu-open">
-                <a href="#" class="nav-link active">
+                <a href="{{ route('home') }}" class="nav-link active">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                     <p>
                         Dashboard
@@ -38,11 +38,11 @@
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-copy"></i>
+                    <i class="nav-icon fas fa-ticket-alt"></i>
                     <p>
                         Offers
-                        <i class="fas fa-angle-left right"></i>
-                        <span class="badge badge-info right">6</span>
+                        <i class="fas fa-ticket-left right"></i>
+                        {{-- <span class="badge badge-info right">6</span> --}}
                     </p>
                 </a>
                 <ul class="nav nav-treeview">
@@ -64,11 +64,11 @@
 
             <li class="nav-item">
                 <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-copy"></i>
+                    <i class="nav-icon fas fa-rupee-sign"></i>
                     <p>
-                        Trnsactions
+                        Transactions
                         <i class="fas fa-angle-left right"></i>
-                        <span class="badge badge-info right">6</span>
+                        {{-- <span class="badge badge-info right">6</span> --}}
                     </p>
                 </a>
                 <ul class="nav nav-treeview">
@@ -88,11 +88,11 @@
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-copy"></i>
+                    <i class="nav-icon fas fa-users"></i>
                     <p>
-                        User
+                        Users
                         <i class="fas fa-angle-left right"></i>
-                        <span class="badge badge-info right">6</span>
+                        {{-- <span class="badge badge-info right">6</span> --}}
                     </p>
                 </a>
                 <ul class="nav nav-treeview">
@@ -110,11 +110,34 @@
                     </li> -->
                 </ul>
             </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-gamepad"></i>
+                    <p>
+                        Games
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ route('game-list') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Games List</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('createGame') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Add Game</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
 
 
             <li class="nav-item">
                 <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-edit"></i>
+                    <i class="nav-icon fas fa-cogs"></i>
                     <p>
                         Admin Settings
                         <i class="fas fa-angle-left right"></i>

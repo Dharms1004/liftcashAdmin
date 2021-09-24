@@ -30,3 +30,9 @@ Route::post('/witdrawApprove', [App\Http\Controllers\Withdraw::class, 'witdrawAp
 
 Route::get('/user-list', [App\Http\Controllers\UserList::class, 'getAllUser'])->name('user-list');
 Route::post('/getUserDetails', [App\Http\Controllers\UserList::class, 'getUserDetails'])->name('getUserDetails');
+
+Route::get('/gameList', [App\Http\Controllers\Games::class, 'gameList'])->name('game-list');
+Route::get('/createGame', [App\Http\Controllers\Games::class, 'createGame'])->name('createGame');
+Route::post('/createGame', [App\Http\Controllers\Games::class, 'createGame'])->name('createGame');
+Route::post('/updateGameStatus', [App\Http\Controllers\Games::class, 'updateGameStatus'])->name('updateGameStatus');
+

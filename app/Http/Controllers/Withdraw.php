@@ -21,7 +21,7 @@ class Withdraw extends Controller
     }
     public function withdrawList(Request $request)
     {
-        //if ($request->isMethod('post')) {
+
         $page = request()->page;
         $withdraw = DB::table('master_transaction_history')
             ->select('users.USER_ID', 'master_transaction_history.BALANCE_TYPE_ID', 'master_transaction_history.TRANSACTION_STATUS_ID', 'master_transaction_history.TRANSACTION_TYPE_ID', 'PAYOUT_COIN', 'PAYOUT_EMIAL', 'PAY_MODE', 'TRANSACTION_DATE', 'INTERNAL_REFERENCE_NO', 'PAYOUT_NUMBER', 'CURRENT_TOT_BALANCE', 'CLOSING_TOT_BALANCE', 'users.SOCIAL_NAME', 'transaction_status.TRANSACTION_STATUS_NAME', 'transaction_type.TRANSACTION_TYPE_NAME', 'balance_type.BALANCE_TYPE')
@@ -31,14 +31,12 @@ class Withdraw extends Controller
             ->join('balance_type', 'balance_type.BALANCE_TYPE_ID', '=', 'master_transaction_history.BALANCE_TYPE_ID')
             ->whereIn('master_transaction_history.TRANSACTION_TYPE_ID',[6])
             ->orderBy('MASTER_TRANSACTTION_ID', 'desc');
-        // dd($promotion);
+
         $withdrawata = $withdraw->simplePaginate(1000, ['*'], 'page', $page);
         $params = $request->all();
         $params['page'] = $page;
-        return view('withdraw', ['withdrawata' => $withdrawata, 'params' => $params]);
-        // } else {
-        //     return view('offerList');
-        // }
+        return view('withdraw', ['withdrawatas' => $withdrawata, 'params' => $params]);
+
     }
     public function witdrawApprove(Request $request)
     {

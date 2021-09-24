@@ -47,16 +47,13 @@
                             <!-- /.card -->
 
                             <div class="card">
-                                <!-- <div class="card-header">
-                                    <h3 class="card-title">DataTable with default features</h3>
-                                </div> -->
                                 <!-- /.card-header -->
                                 <div class="card-body">
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
                                                 <th>Sl No.</th>
-                                                <td>Select</td>
+                                                <th>Select</th>
                                                 <th>Name</th>
                                                 <th>Balance Type</th>
                                                 <th>Status</th>
@@ -73,8 +70,8 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @if(!empty($withdrawata))
-                                            @foreach($withdrawata as $withdrawata)
+                                            @if(!empty($withdrawatas))
+                                            @foreach($withdrawatas as $withdrawata)
                                             <tr>
                                                 <td>{{ $loop->iteration }} </td>
                                                 @if($withdrawata->TRANSACTION_STATUS_NAME == "Withdraw Pending")
@@ -121,24 +118,15 @@
                                             @endforeach
                                             @endif
                                         </tbody>
-                                        <!-- <tfoot>
-                                            <tr>
-                                                <th>Sl No.</th>
-                                                <th>Name</th>
-                                                <th>Balance Type</th>
-                                                <th>Status</th>
-                                                <th>Type</th>
-                                                <th>Payout Coin</th>
-                                                <th>Payout Email</th>
-                                                <th>Pay Mode</th>
-                                                <th>Date</th>
-                                                <th>Internal Refference No</th>
-                                                <th>Payout No</th>
-                                                <th>Current Tot Bal</th>
-                                                <th>Closing Tot Bal</th>
-                                            </tr>
-                                        </tfoot> -->
                                     </table>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6"></div>
+                                        <div class="col-sm-12 col-md-6">
+
+                                            {{ $withdrawatas->render("pagination::default") }}
+                                        </div>
+
+                                    </div>
                                     <div class="card-footer">
                                         <button style="display:none" type="submit" id="withdraw_approve" class="btn btn-info">Approve</button>
                                         <button style="display:none"  id="withdraw_approve_loader" class="btn btn-info">Processing..</button>
@@ -214,7 +202,7 @@
             jQuery('#withdraw_approve').click(function(e) {
                 $('#withdraw_approve').hide();
                 $('#withdraw_approve_loader').show();
-                
+
                 e.preventDefault();
                 var tableData = getRefNoAndWoffValueFromTable();
                 //    $.ajaxSetup({
@@ -237,7 +225,7 @@
             });
         });
 
-        //if selected any checkbox then action button will show     
+        //if selected any checkbox then action button will show
         $(document).on('change', '.checkbox', function(e) {
             var len = $(document).find(".td-refNoCheckBoxSelect input:checked").length;
             if (len > 0) {

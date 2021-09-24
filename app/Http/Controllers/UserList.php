@@ -29,10 +29,10 @@ class UserList extends Controller
             // ->join('balance_type as bt', 'bt.BALANCE_TYPE_ID', '=', 'uw.BALANCE_TYPE')
             ->orderBy('USER_ID', 'desc');
         // dd($promotion);
-        $userData = $user->simplePaginate(1000, ['*'], 'page', $page);
+        $userData = $user->paginate(500, ['*'], 'page', $page);
         $params = $request->all();
         $params['page'] = $page;
-        return view('userList', ['userData' => $userData, 'params' => $params]);
+        return view('userList', ['userDatas' => $userData, 'params' => $params]);
         // } else {
         //     return view('offerList');
         // }
@@ -54,6 +54,6 @@ class UserList extends Controller
             'BALANCE' => $user->BALANCE ?? "",
             'BALANCE_TYPE' => $user->BALANCE_TYPE_DESC ?? "",
           ]);
-      
+
     }
 }
