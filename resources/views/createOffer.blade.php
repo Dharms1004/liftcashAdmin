@@ -238,8 +238,8 @@
                                             </div>&nbsp
                                             @endif
                                             </div>
-                                            
-                                        
+
+
                                     </div>
 
                             </div>
@@ -310,24 +310,12 @@
 
             $(wrapper).on("click", ".remove_field", function(e) { //user click on remove text
                 // alert('dsads');
-                // e.preventDefault(); 
+                // e.preventDefault();
                 $(this).parents('.input-group').remove();
                 // $(this).parent().parent().remove();
 
             })
         });
-        // alerts
-        // $(function() {
-        //     var Toast = Swal.mixin({
-        //         toast: true,
-        //         position: 'top-end',
-        //         showConfirmButton: false,
-        //         timer: 3000
-        //     });
-
-        //     toastr.success('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
-        //     toastr.error('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
-        // });
     </script>
     @if($errors->any())
     <script>

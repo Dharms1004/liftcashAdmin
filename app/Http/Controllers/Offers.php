@@ -20,17 +20,14 @@ class Offers extends Controller
     }
     public function offerList(Request $request)
     {
-        //if ($request->isMethod('post')) {
         $page = request()->page;
         $promotion = DB::table('offer')->orderBy('OFFER_ID', 'desc');
-        // dd($promotion);
-        $promodata = $promotion->simplePaginate(1000, ['*'], 'page', $page);
+
+        $promodata = $promotion->simplePaginate(500, ['*'], 'page', $page);
         $params = $request->all();
         $params['page'] = $page;
-        return view('offerList', ['promodata' => $promodata, 'params' => $params]);
-        // } else {
-        //     return view('offerList');
-        // }
+        return view('offerList', ['promodatas' => $promodata, 'params' => $params]);
+
     }
 
     public function createOffer(Request $request)
@@ -148,7 +145,7 @@ class Offers extends Controller
                 ];
             }
 
-            
+
             if (empty($request->editType)) {
                 $creteOffer = Offer::create($offerData);
                 if ($creteOffer) {
@@ -184,7 +181,7 @@ class Offers extends Controller
         }else{
             $status=3;
         }
-        
+
         $updateOffer = Offer::where('OFFER_ID', $request->offer_id)->update(['STATUS' =>$status]);
         return $updateOffer;
     }

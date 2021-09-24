@@ -47,15 +47,13 @@
                             <!-- /.card -->
 
                             <div class="card">
-                                <div class="card-header">
-                                    <h3 class="card-title">DataTable with default features</h3>
-                                </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th>Sl No.</th>
+                                                <th>S No.</th>
+                                                <th>Offer Id</th>
                                                 <th>Type</th>
                                                 <th>Display Type</th>
                                                 <th>Ctegory</th>
@@ -82,10 +80,11 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @if(!empty($promodata))
-                                            @foreach($promodata as $promodata)
+                                            @if(!empty($promodatas))
+                                            @foreach($promodatas as $promodata)
                                             <tr>
                                                 <td>{{ $loop->iteration }} </td>
+                                                <td>{{ $promodata->OFFER_ID }} </td>
                                                 @if($promodata->OFFER_TYPE == 1)
                                                 <td>Install</td>
                                                 @elseif($promodata->OFFER_TYPE == 2)
@@ -182,36 +181,18 @@
                                             @endforeach
                                             @endif
                                         </tbody>
-                                        <!-- <tfoot>
-                                            <tr>
-                                                <th>Sl No.</th>
-                                                <th>Type</th>
-                                                <th>Display Type</th>
-                                                <th>Ctegory</th>
-                                                <th>Name</th>
-                                                <th>Details</th>
-                                                <th>Steps</th>
-                                                <th>Amount</th>
-                                                <th>Package</th>
-                                                <th>Thumbnail</th>
-                                                <th>Banner</th>
-                                                <th>Url</th>
-                                                <th>Os</th>
-                                                <th>Origin</th>
-                                                <th>Cap</th>
-                                                <th>Fallback</th>
-                                                <th>Start</th>
-                                                <th>End</th>
-                                                <th>Status</th>
-                                                <th>Off App</th>
-                                                <th>Date</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </tfoot> -->
                                     </table>
 
                                 </div>
                                 <!-- /.card-body -->
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-6"></div>
+                                <div class="col-sm-12 col-md-6">
+
+                                    {{ $promodatas->render("pagination::default") }}
+                                </div>
+
                             </div>
                             <!-- /.card -->
                         </div>
@@ -291,7 +272,7 @@
                   data: {
                     "_token": "{{ csrf_token() }}",
                     offer_id: offer_id,
-                     
+
                   },
                   success: function(result){
                     location.reload();
