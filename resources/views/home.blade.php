@@ -1,9 +1,5 @@
-@extends('layouts.app')
-
-@section('content')
 @extends('common.head')
 
-<body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <div class="wrapper">
 
         <!-- Preloader -->
@@ -920,7 +916,3 @@
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="{!! asset('dist/js/pages/dashboard2.js') !!}"></script>
 
-</body>
-
-</html>
-@endsection
