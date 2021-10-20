@@ -61,4 +61,7 @@ Route::post('/updateGameStatus', [App\Http\Controllers\Games::class, 'updateGame
     Route::get('getExcelExport', [App\Http\Controllers\ManageQuestionController::class, 'getExcelExport'])->name('getExcelExport');
 
 
+    Route::get('/balancePatch', [App\Http\Controllers\BalancePatch::class, 'index'])->name('balancePatch');
+
+
 

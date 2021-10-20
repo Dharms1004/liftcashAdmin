@@ -1,4 +1,4 @@
-@extends('common.head')
+@include('common.head')
 
     <div class="wrapper">
 

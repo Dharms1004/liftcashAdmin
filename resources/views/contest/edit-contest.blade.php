@@ -11,7 +11,7 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="#" class="brand-link">
-                <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <img src="{!! asset('dist/img/AdminLTELogo.png') !!}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">LiftCash</span>
             </a>
 
@@ -27,17 +27,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            @if(!empty($type) && $type =="edit")
-                            <h1>Edit Game</h1>
-                            @else
-                            <h1>Create Game</h1>
-                            @endif
-
+                            <h1>Edit Contest</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                                <li class="breadcrumb-item active">Edit Game</li>
+                                <li class="breadcrumb-item active">Edit Contest</li>
                             </ol>
                         </div>
                     </div>
@@ -73,21 +68,21 @@
                                         </div>
                                      </div>
                                      <div class="row">
-                                        <div class="form-group col-md-4">
+                                        {{-- <div class="form-group col-md-4">
                                            <label>Video Link: <span class="text-danger">*</span></label>
                                            <input type="text" name="contest_video_url" id="contest_video_url" class="form-control @error('contest_video_url') error @enderror" placeholder="Video Link" value="{{!empty($contestData)?$contestData->CONTEST_VIDEO_URL:old('contest_video_url')}}">
                                            @error('contest_video_url') <label id="contest_video_url-error" class="error" for="contest_video_url">{{ $message }}</label> @enderror
-                                        </div>
+                                        </div> --}}
                                         <div class="form-group col-md-4">
                                            <label>Image: </label>
                                            <input type="file" class="form-control @error('contest_image_link') error @enderror" name="contest_image_link" id="contest_image_link"  value="{{!empty($contestData)?$contestData->CONTEST_IMAGE_LINK:old('contest_image_link')}}" accept="image/*">
                                            @error('contest_image_link') <label id="contest_image_link-error" class="error" for="contest_image_link">{{ $message }}</label> @enderror
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        {{-- <div class="form-group col-md-4">
                                            <label>Video Description: </label>
                                            <input type="text" class="form-control @error('contest_video_description') error @enderror" name="contest_video_description" id="contest_video_description" placeholder="Video Description" value="{{!empty($contestData)?$contestData->CONTEST_VIDEO_DESCRIPTION:old('contest_video_description')}}">
                                            @error('contest_video_description') <label id="contest_video_description-error" class="error" for="contest_video_description">{{ $message }}</label> @enderror
-                                        </div>
+                                        </div> --}}
                                      </div>
                                      <div class="form-group">
                                         <label>Terms & Conditions: </label>
