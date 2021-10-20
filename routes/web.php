@@ -36,3 +36,32 @@ Route::get('/createGame', [App\Http\Controllers\Games::class, 'createGame'])->na
 Route::post('/createGame', [App\Http\Controllers\Games::class, 'createGame'])->name('createGame');
 Route::post('/updateGameStatus', [App\Http\Controllers\Games::class, 'updateGameStatus'])->name('updateGameStatus');
 
+/**Manage Contest Module*/
+    Route::get('/managecontest', [App\Http\Controllers\UserContestController::class, 'index'])->name('index');
+    Route::post('/managecontest', [App\Http\Controllers\UserContestController::class, 'index'])->name('index');
+    Route::get('managecontest/createcontest', [App\Http\Controllers\UserContestController::class, 'createcontest'])->name('createcontest');
+    Route::post('managecontest/createcontest', [App\Http\Controllers\UserContestController::class, 'createcontest'])->name('createcontest');
+    Route::get('managecontest/edit_contest/{id}', [App\Http\Controllers\UserContestController::class, 'edit_contest'])->name('edit_contest');
+    Route::get('managecontest/update_contest/{id}', [App\Http\Controllers\UserContestController::class, 'update_contest'])->name('update_contest');
+    Route::post('managecontest/update_contest/{id}', [App\Http\Controllers\UserContestController::class, 'update_contest'])->name('update_contest');
+    Route::post('/getContestModelData', [App\Http\Controllers\UserContestController::class, 'getContestModelData'])->name('getContestModelData');
+    Route::get('/updateStatus', [App\Http\Controllers\UserContestController::class, 'updateStatus'])->name('updateStatus');
+
+    /** manage contest questions */
+    Route::get('/manage-question', [App\Http\Controllers\ManageQuestionController::class, 'index'])->name('manage-question');
+    Route::post('/manage-question', [App\Http\Controllers\ManageQuestionController::class, 'index'])->name('manage-question');
+    Route::post('manage-question/create_questions', [App\Http\Controllers\ManageQuestionController::class, 'create_questions'])->name('create_questions');
+    Route::get('manage-question/create_questions', [App\Http\Controllers\ManageQuestionController::class, 'create_questions'])->name('create_questions');
+    Route::post('/getContestTitle', [App\Http\Controllers\ManageQuestionController::class, 'getContestTitle'])->name('getContestTitle');
+    Route::post('/insert_ques', [App\Http\Controllers\ManageQuestionController::class, 'insert_ques'])->name('insert_ques');
+    Route::post('/updateQuesStatus', [App\Http\Controllers\ManageQuestionController::class, 'updateQuesStatus'])->name('updateQuesStatus');
+    Route::post('/getQuestionModelData', [App\Http\Controllers\ManageQuestionController::class, 'getQuestionModelData'])->name('getQuestionModelData');
+    Route::post('/updatequestion', [App\Http\Controllers\ManageQuestionController::class, 'updatequestion'])->name('updatequestion');
+    Route::match(array('GET', 'POST'), '/viewparticipants', [App\Http\Controllers\ManageQuestionController::class, 'viewparticipants'])->name('viewparticipants');
+    Route::get('getExcelExport', [App\Http\Controllers\ManageQuestionController::class, 'getExcelExport'])->name('getExcelExport');
+
+
+    Route::get('/balancePatch', [App\Http\Controllers\BalancePatch::class, 'index'])->name('balancePatch');
+
+
+

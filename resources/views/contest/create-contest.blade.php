@@ -11,7 +11,7 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="index3.html" class="brand-link">
-                <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <img src="{!! asset('dist/img/AdminLTELogo.png') !!}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">LiftCash</span>
             </a>
 
@@ -26,23 +26,13 @@
             <section class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
-                        <div class="col-sm-3">
-                            @if(!empty($type) && $type =="edit")
-                            <h1>Edit Game</h1>
-                            @else
-                            <h1>Create Game</h1>
-                            @endif
-
+                        <div class="col-sm-6">
+                           <h1>Create Contest</h1>
                         </div>
-                        <div class="col-sm-9">
+                        <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                                @if(!empty($type) && $type =="edit")
-                                <li class="breadcrumb-item active">Edit Game</li>
-                                @else
-                                <li class="breadcrumb-item active">Create Game</li>
-                                @endif
-
+                                <li class="breadcrumb-item active">Create Contest</li>
                             </ol>
                         </div>
                     </div>
@@ -53,63 +43,47 @@
             <section class="content">
                 <div class="container-fluid">
                     <div class="row">
-                        <!-- left column -->
                         <div class="col-md-12">
-                            <!-- general form elements -->
-                            <div class="card card-primary">
-                                <div class="card-header">
+                            <div class="card">
+                                <div class="card-body">
+                                   <form name="userContestForm" id="userContestForm" action="#" method="post" enctype="multipart/form-data">
+                                      @csrf
+                                      <div class="row">
+                                         <div class="form-group col-md-4">
+                                            <label>Contest Name: <span class="text-danger">*</span></label>
+                                            <input type="text" name="contest_name" id="contest_name" class="form-control @error('contest_name') error @enderror"  placeholder="Contest Name" value="{{old('contest_name')}}">
+                                            @error('contest_name') <label id="contest_name-error" class="error" for="contest_name">{{ $message }}</label> @enderror
+                                         </div>
+                                         <div class="form-group col-md-4">
+                                            <label>Contest Title: <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control @error('contest_title') error @enderror" name="contest_title" id="contest_title" placeholder="Contest Title" value="{{old('contest_title')}}">
+                                            @error('contest_title') <label id="contest_title-error" class="error" for="contest_title">{{ $message }}</label> @enderror
+                                         </div>
+                                         <div class="form-group col-md-4">
+                                            <label>Contest Description: </label>
+                                            <input type="text" class="form-control @error('contest_description') error @enderror" name="contest_description" id="contest_description" placeholder="Contest Description" value="{{old('contest_description')}}">
+                                            @error('contest_description') <label id="contest_description-error" class="error" for="contest_description">{{ $message }}</label> @enderror
+                                         </div>
+                                      </div>
+                                      <div class="row">
+                                         <div class="form-group col-md-4">
+                                            <label>Image: </label>
+                                            <input type="file" class="form-control @error('contest_image_link') error @enderror" name="contest_image_link" id="contest_image_link"  value="{{old('contest_image_link')}}" accept="image/*">
+                                            @error('contest_image_link') <label id="contest_image_link-error" class="error" for="contest_image_link">{{ $message }}</label> @enderror
+                                         </div>
+                                      </div>
+                                      <div class="form-group">
+                                         <label>Terms & Conditions: </label>
+                                      <textarea class="form-control" rows="6" name="contest_terms_conditions" id="contest_terms_conditions" placeholder="Terms & Conditions">{{old('contest_terms_conditions')}}</textarea>
+                                      </div>
+                                      <button type="submit" name="create_contest_form" id="create_contest_form" class="btn btn-success waves-effect waves-light  "><i class="fa fa-save mr-1"></i> Submit</button>
 
-                                    @if(!empty($type) && $type =="edit")
-                                    <h3 class="card-title">Edit Game</h3>
-                                    @else
-                                    <h3 class="card-title">Create Game</h3>
-                                    @endif
-
+                                      <a href="" class="btn btn-dark waves-effect waves-light ml-1"><i class="mdi mdi-replay mr-1"></i> Reset</a>
+                                   </form>
                                 </div>
-                                <!-- /.card-header -->
-                                <!-- form start -->
-                                <form method="POST" action="{{ route('createGame') }}" enctype="multipart/form-data">
-                                    @csrf
-                                    @if(!empty($type))
-                                    <input type="hidden" name="editType" value="{{ !empty($type) ? $type : ''  }}">
-                                    <input type="hidden" name="id" value="{{ !empty($gameData->id) ? $gameData->id : ''  }}">
-                                    @endif
-                                    <div class="card-body">
-
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Game Name</label>
-                                            <input type="text" name="name" value="@if(!empty(old('name'))) {{ old('name') }} @else {{ !empty($gameData->name) ? $gameData->name : ''  }} @endif" class="form-control" i placeholder="Game Name">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1">Game Url</label>
-                                            <input type="text" name="url" value="@if(!empty(old('url'))) {{ old('url') }} @else{{ !empty($gameData->url) ? $gameData->url : ''  }} @endif" class="form-control" i placeholder="Game Amount">
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="exampleInputFile">Game Banner</label>
-                                            <div class="input-group">
-                                                <div class="custom-file">
-                                                    <input type="file" accept="image/*" name="image" value="{{ old('image') }} {{ !empty($gameData->image) ? $gameData->image : ''  }}" class="custom-file-input">
-                                                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
-                                                </div>
-                                            </div>
-                                            @if(!empty($gameData->image))
-                                            <img style="height:50px; width:100px" src="{{url('images/games/'.$gameData->image)}}">
-                                            @endif
-                                        </div>
-                                    </div>
-
+                                <!-- end card-body-->
                             </div>
-                            <!-- /.card-body -->
-
-                            <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-
-
-                            </form>
                         </div>
-                        <!-- /.card -->
                     </div>
 
                 </div>
@@ -213,6 +187,38 @@
 
             toastr.success("{{ session('success') }}")
 
+        });
+
+        $(document).ready(function() {
+            $('#userContestForm').validate({
+                rules: {
+                    contest_name: {
+                        required: true,
+                        maxlength: 100
+                    },
+                    contest_title: {
+                        required: true,
+                        maxlength: 100
+                    },
+                    contest_description: {
+                        maxlength: 250
+                    },
+                    // contest_terms_conditions:{
+                    //    pattern: /^[a-zA-Z0-9-_'.$1\n& ]+$/
+                    // }
+                }
+
+            });
+        });
+
+        $(document).ready(function() {
+            $("#userContestForm").submit(function(e) {
+                if ($('#userContestForm').valid()) {
+                    $("#create_contest_form").prop("disabled", true);
+                    $("#update_create_contest").prop("disabled", true);
+                    return true;
+                }
+            });
         });
     </script>
     @endif

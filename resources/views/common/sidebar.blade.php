@@ -2,7 +2,8 @@
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-            <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+            {{-- <img src="/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image"> --}}
+            <img src="{!! asset('dist/img/user2-160x160.jpg') !!}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
             <a href="{{ route('home') }}" class="d-block">{{ Auth::user()->name }}</a>
@@ -41,7 +42,7 @@
                     <i class="nav-icon fas fa-ticket-alt"></i>
                     <p>
                         Offers
-                        <i class="fas fa-ticket-left right"></i>
+                        <i class="fas fa-angle-left right"></i>
                         {{-- <span class="badge badge-info right">6</span> --}}
                     </p>
                 </a>
@@ -129,6 +130,30 @@
                         <a href="{{ route('createGame') }}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Add Game</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-award"></i>
+                    <p>
+                        Contest
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ route('index') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Contest List</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('manage-question') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Manage Questions</p>
                         </a>
                     </li>
                 </ul>
