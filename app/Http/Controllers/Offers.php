@@ -185,4 +185,25 @@ class Offers extends Controller
         $updateOffer = Offer::where('OFFER_ID', $request->offer_id)->update(['STATUS' =>$status]);
         return $updateOffer;
     }
+
+    public function getConvertedOffers(Request $request)
+    {
+
+        //select oc.OFFER_CLICK_ID, o.OFFER_NAME, oc.CLICK_ID, oc.CLICKED_ON, o.OFFER_AMOUNT, u.USER_NAME from offer_clicks as oc
+        // JOIN offer as o on oc.OFFER_ID = o.OFFER_ID join users as u on oc.USER_ID = u.USER_ID order by oc.OFFER_CLICK_ID desc;
+
+        $page = request()->page;
+
+        $convertedOffer = DB::table('offer_clicks as oc')
+            ->select( 'oc.OFFER_CLICK_ID', 'o.OFFER_NAME', 'oc.CLICK_ID', 'oc.CLICKED_ON', 'o.OFFER_AMOUNT', 'u.USER_NAME')
+            ->join('users as u', 'oc.USER_ID', '=', 'u.USER_ID')
+            ->join('offer as o', 'oc.OFFER_ID', '=', 'o.OFFER_ID')
+            ->orderBy('oc.OFFER_CLICK_ID', 'desc');
+
+        $offerConvertData = $convertedOffer->paginate(1000, ['*'], 'page', $page);
+        $params = $request->all();
+        $params['page'] = $page;
+        return view('convertoffer', ['offerConvertData' => $offerConvertData, 'params' => $params]);
+
+    }
 }

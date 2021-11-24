@@ -56,7 +56,13 @@
                     <li class="nav-item">
                         <a href="{{ route('createOffer') }}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
-                            <p>Create Offers</p>
+                            <p>Create Offer</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('convertOffer-list') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Converted Offers</p>
                         </a>
                     </li>
                 </ul>

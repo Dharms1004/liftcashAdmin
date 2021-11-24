@@ -26,6 +26,7 @@ Route::get('/createOffer', [App\Http\Controllers\Offers::class, 'createOffer'])-
 Route::post('/createOffer', [App\Http\Controllers\Offers::class, 'createOffer'])->name('createOffer');
 Route::post('/updateOfferStatus', [App\Http\Controllers\Offers::class, 'updateOfferStatus'])->name('updateOfferStatus');
 Route::get('/withdraw-list', [App\Http\Controllers\Withdraw::class, 'withdrawList'])->name('withdraw-list');
+Route::get('/convertOffer-list', [App\Http\Controllers\Offers::class, 'getConvertedOffers'])->name('convertOffer-list');
 Route::post('/witdrawApprove', [App\Http\Controllers\Withdraw::class, 'witdrawApprove'])->name('updateOfferStatus');
 
 Route::get('/user-list', [App\Http\Controllers\UserList::class, 'getAllUser'])->name('user-list');
