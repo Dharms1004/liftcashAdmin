@@ -29,7 +29,7 @@ class UserList extends Controller
             // ->join('balance_type as bt', 'bt.BALANCE_TYPE_ID', '=', 'uw.BALANCE_TYPE')
             ->orderBy('USER_ID', 'desc');
         // dd($promotion);
-        $userData = $user->paginate(500, ['*'], 'page', $page);
+        $userData = $user->paginate(1000, ['*'], 'page', $page);
         $params = $request->all();
         $params['page'] = $page;
         return view('userList', ['userDatas' => $userData, 'params' => $params]);

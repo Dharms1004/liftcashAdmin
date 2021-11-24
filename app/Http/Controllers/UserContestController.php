@@ -36,7 +36,6 @@ class UserContestController extends Controller
                     $path =  $imageName;
                 }
 
-                // $imageurl = $this->getS3BucketImage($request);
                 $data = [
                     'CONTEST_NAME' => $request->contest_name,
                     'CONTEST_TITLE' => $request->contest_title,
@@ -53,7 +52,6 @@ class UserContestController extends Controller
                     return back()->with('error','Contest  added failed');
                 }
             }else{
-                dd("hello");
                 return back()->with('error','Please make sure all contests inactive')->withInput();
             }
         }
@@ -87,9 +85,6 @@ class UserContestController extends Controller
                     'contest_name' => 'required|max:100',
                     'contest_title' => 'required|max:100',
                     'contest_description' => 'max:250',
-                    'contest_video_url' => 'required',
-                    'contest_video_description' => 'max:250',
-                    "contest_image_link"	=> 'mimes:jpeg,JPEG,jpg,png,PNG'
                 ]);
                 $imageurl = $this->getS3BucketImage($request);
                 $data = [
@@ -109,6 +104,7 @@ class UserContestController extends Controller
                 return back()->with('success','Contest updated successfully');
             }
         }catch(\Exception $e){
+            dd($e);
             return back()->with('error',$e->getMessage())->withInput();
         }
     }

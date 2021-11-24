@@ -30,9 +30,10 @@ class Withdraw extends Controller
             ->join('transaction_status', 'transaction_status.TRANSACTION_STATUS_ID', '=', 'master_transaction_history.TRANSACTION_STATUS_ID')
             ->join('balance_type', 'balance_type.BALANCE_TYPE_ID', '=', 'master_transaction_history.BALANCE_TYPE_ID')
             ->whereIn('master_transaction_history.TRANSACTION_TYPE_ID',[6])
+            ->whereIn('master_transaction_history.TRANSACTION_STATUS_ID',[6])
             ->orderBy('MASTER_TRANSACTTION_ID', 'desc');
 
-        $withdrawata = $withdraw->simplePaginate(1000, ['*'], 'page', $page);
+        $withdrawata = $withdraw->paginate(1000, ['*'], 'page', $page);
         $params = $request->all();
         $params['page'] = $page;
         return view('withdraw', ['withdrawatas' => $withdrawata, 'params' => $params]);
