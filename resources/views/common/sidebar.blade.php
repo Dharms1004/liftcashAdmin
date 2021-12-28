@@ -143,6 +143,60 @@
 
             <li class="nav-item">
                 <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-gamepad"></i>
+                    <p>
+                        Video Listing
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ route('video-list') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Video List</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('createVideo') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Add Video</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-gamepad"></i>
+                    <p>
+                        Mini Banner
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ route('banner-list') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Banner List</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('createBanner') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Add Banner</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('createPopup') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Manage Popup</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item">
+                <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-award"></i>
                     <p>
                         Contest

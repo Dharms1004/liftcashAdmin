@@ -36,6 +36,20 @@ Route::get('/gameList', [App\Http\Controllers\Games::class, 'gameList'])->name('
 Route::get('/createGame', [App\Http\Controllers\Games::class, 'createGame'])->name('createGame');
 Route::post('/createGame', [App\Http\Controllers\Games::class, 'createGame'])->name('createGame');
 Route::post('/updateGameStatus', [App\Http\Controllers\Games::class, 'updateGameStatus'])->name('updateGameStatus');
+Route::post('/makeReccomendedGame', [App\Http\Controllers\Games::class, 'makeReccomendedGame'])->name('makeReccomendedGame');
+
+Route::get('/videoList', [App\Http\Controllers\VideoListing::class, 'videoList'])->name('video-list');
+Route::get('/createVideo', [App\Http\Controllers\VideoListing::class, 'createVideo'])->name('createVideo');
+Route::post('/createVideo', [App\Http\Controllers\VideoListing::class, 'createVideo'])->name('createVideo');
+Route::post('/updateVideoStatus', [App\Http\Controllers\VideoListing::class, 'updateVideoStatus'])->name('updateVideoStatus');
+
+Route::get('/bannerList', [App\Http\Controllers\MiniBanner::class, 'bannerList'])->name('banner-list');
+Route::get('/createBanner', [App\Http\Controllers\MiniBanner::class, 'createBanner'])->name('createBanner');
+Route::post('/createBanner', [App\Http\Controllers\MiniBanner::class, 'createBanner'])->name('createBanner');
+Route::post('/updateBannerStatus', [App\Http\Controllers\MiniBanner::class, 'updateBannerStatus'])->name('updateBannerStatus');
+
+Route::get('/createPopup', [App\Http\Controllers\MiniBanner::class, 'createPopup'])->name('createPopup');
+Route::post('/createPopup', [App\Http\Controllers\MiniBanner::class, 'createPopup'])->name('createPopup');
 
 /**Manage Contest Module*/
     Route::get('/managecontest', [App\Http\Controllers\UserContestController::class, 'index'])->name('index');

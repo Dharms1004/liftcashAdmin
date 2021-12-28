@@ -26,12 +26,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Game List</h1>
+                            <h1>Offer List</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                                <li class="breadcrumb-item active">Game List</li>
+                                <li class="breadcrumb-item active">Offer List</li>
                             </ol>
                         </div>
                     </div>
@@ -55,41 +55,33 @@
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th>Sl No.</th>
-                                                <th>Name</th>
+                                                <th>S No.</th>
+                                                <th>Heading</th>
                                                 <th>Thumbnail</th>
                                                 <th>Url</th>
                                                 <th>Status</th>
-                                                <th>Reccomended</th>
                                                 <th>Action</th>
 
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @if(!empty($gamedata))
-                                            @foreach($gamedata as $gamedata)
+                                            @if(!empty($bannerDatas))
+                                            @foreach($bannerDatas as $bannerData)
                                             <tr>
                                                 <td>{{ $loop->iteration }} </td>
-                                                <td>{{ $gamedata->name }}</td>
-                                                <td><img style="height:50px; width:100px" src="{{url('images/games/'.$gamedata->image)}}"></td>
-                                                <td>{{ $gamedata->url }}</td>
-                                                @if($gamedata->status == 1)
-                                                <td><button type="button" data-offer-id="{{ $gamedata->id }}" class="btn btn-block btn-success btn-sm status">Active</button></td>
-                                                @elseif($gamedata->status == 2)
-                                                <td><button type="button" data-offer-id="{{ $gamedata->id }}" class="btn btn-block btn-danger btn-sm status">Inactive</button></td>
-                                                @elseif($gamedata->status == 3)
+                                                <td>{{ $bannerData->HEADING }}</td>
+                                                <td><img style="height:50px; width:100px" src="{{url('images/banners/'.$bannerData->THUMBNAIL)}}"></td>
+                                                <td>{{ $bannerData->ACTION_URL }}</td>
+                                                @if($bannerData->STATUS == 1)
+                                                <td><button type="button" data-offer-id="{{ $bannerData->ID }}" class="btn btn-block btn-success btn-sm">Active</button></td>
+                                                @elseif($bannerData->STATUS == 2)
+                                                <td><button type="button" data-offer-id="{{ $bannerData->ID }}" class="btn btn-block btn-danger btn-sm">Inactive</button></td>
+                                                @elseif($bannerData->STATUS == 3)
                                                 <td><button type="button" class="btn btn-block btn-danger btn-sm">Deleted</button></td>
                                                 @else
                                                 <td>Null</td>
                                                 @endif
-                                                @if($gamedata->is_reccomended == 1)
-                                                <td><button type="button" data-offer-id="{{ $gamedata->id }}" class="btn btn-block btn-success btn-sm recco">Yes</button></td>
-                                                @elseif($gamedata->is_reccomended == 0)
-                                                <td><button type="button" data-offer-id="{{ $gamedata->id }}" class="btn btn-block btn-danger btn-sm recco">No</button></td>
-                                                @else
-                                                <td>Null</td>
-                                                @endif
-                                                <td><a href="{{ route('createGame') }}?type=edit&id={{ $gamedata->id }}" class="btn btn-app"><i class="fas fa-edit"></i> Edit</a></td>
+                                                <td><a href="{{ route('createBanner') }}?type=edit&id={{ $bannerData->ID }}" class="btn btn-app"><i class="fas fa-edit"></i> Edit</a></td>
                                             </tr>
                                             @endforeach
                                             @endif
@@ -155,29 +147,11 @@
 
 
         jQuery(document).ready(function(){
-            jQuery('.status').click(function(e){
+            jQuery('.btn-block').click(function(e){
                e.preventDefault();
                var offer_id=$(this).attr("data-offer-id");
                jQuery.ajax({
                   url: "{{ url('/updateGameStatus') }}",
-                  method: 'post',
-                  data: {
-                    "_token": "{{ csrf_token() }}",
-                    id: offer_id,
-
-                  },
-                  success: function(result){
-                    location.reload();
-                  }});
-               });
-            });
-
-            jQuery(document).ready(function(){
-            jQuery('.recco').click(function(e){
-               e.preventDefault();
-               var offer_id=$(this).attr("data-offer-id");
-               jQuery.ajax({
-                  url: "{{ url('/makeReccomendedGame') }}",
                   method: 'post',
                   data: {
                     "_token": "{{ csrf_token() }}",

@@ -6,32 +6,32 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use App\Models\Promotions;
-use App\Models\Game;
+use App\Models\VideoList;
 use DB;
 use Auth;
 use Illuminate\Support\Facades\Validator;
 
-class Games extends Controller
+class VideoListing extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    public function gameList(Request $request){
+    public function videoList(Request $request){
         $page = request()->page;
-        $games = DB::table('games')->orderBy('id', 'desc');
+        $videos = DB::table('video_listing')->orderBy('id', 'desc');
         // dd($promotion);
-        $gamedata = $games->simplePaginate(1000, ['*'], 'page', $page);
+        $videoData = $videos->simplePaginate(1000, ['*'], 'page', $page);
         $params = $request->all();
         $params['page'] = $page;
 
-        return view('gameList', ['gamedata' => $gamedata, 'params' => $params]);
+        return view('videoList', ['videoDatas' => $videoData, 'params' => $params]);
     }
 
-    public function updateGameStatus(Request $request){
+    public function updateVideoStatus(Request $request){
 
-        $gameData = DB::table('games')->where('id', $request->id)->orderBy('id', 'desc')->first();
+        $gameData = DB::table('video_listing')->where('id', $request->id)->orderBy('id', 'desc')->first();
         if($gameData->status==1){
             $status=2;
         }else if($gameData->status==2){
@@ -44,64 +44,56 @@ class Games extends Controller
         return $updateOffer;
     }
 
-    public function makeReccomendedGame(Request $request){
-
-        $gameData = DB::table('games')->where('id', $request->id)->first();
-        if($gameData->is_reccomended==1){
-            $status=0;
-        }else if($gameData->is_reccomended==0){
-            $status=1;
-        }
-
-        $updateOffer = Game::where('id', $request->id)->update(['is_reccomended' =>$status]);
-        return $updateOffer;
-    }
-
-    public function  createGame(Request $request){
+    public function  createVideo(Request $request){
         if ($request->isMethod('post')) {
             $validator = Validator::make($request->all(),  [
-                'name' => 'required',
+                'title' => 'required',
                 // 'image' => 'required',
                 'url' => 'required',
+                'video_url' => 'required',
             ]);
-
+            
             if ($validator->fails()) {
                 if (!empty($request->editType) && !empty($request->id) && $request->editType == "edit") {
-                    return redirect()->to('createGame?type=edit&id=' . $request->id . '')
+                    return redirect()->to('createVideo?type=edit&id=' . $request->id . '')
                         ->withErrors($validator)
                         ->withInput();
                 } else {
-                    return redirect('createGame')
+                    return redirect('createVideo')
                         ->withErrors($validator)
                         ->withInput();
                 }
             }
 
             if (!empty($request->image)) {
-                $imageName = time() . 'game.' . $request->image->extension();
-                $request->image->move(public_path('images/games'), $imageName);
+                $imageName = time() . 'video.' . $request->image->extension();
+                $request->image->move(public_path('images/video'), $imageName);
                 $path =  $imageName;
             }
 
             if (!empty($request->editType) && $request->editType == "edit") {
-                $gameData = DB::table('games')->where('id', $request->id)->orderBy('id', 'desc')->first();
+                $videoData = DB::table('video_listing')->where('id', $request->id)->orderBy('id', 'desc')->first();
 
                 if(empty($path)){
-                    $path = $gameData->image;
+                    $path = $videoData->banner;
                 }
 
-                $gameData = [
-                    'name' => $request->name,
-                    'image' => $path ?? "",
+                $videoData = [
+                    'title' => $request->title,
+                    'desc' => $request->desc,
+                    'banner' => $path ?? "",
                     'url' => $request->url,
+                    'video_url' => $request->video_url,
                     'status' => 1,
                     'created_at' => date('Y-m-d H:i:s'),
                 ];
             } else {
-                $gameData = [
-                    'name' => $request->name,
-                    'image' => $path ?? "",
+                $videoData = [
+                    'title' => $request->title,
+                    'desc' => $request->desc,
+                    'banner' => $path ?? "",
                     'url' => $request->url,
+                    'video_url' => $request->video_url,
                     'status' => 1,
                     'created_at' => date('Y-m-d H:i:s'),
                 ];
@@ -109,26 +101,26 @@ class Games extends Controller
 
 
             if (empty($request->editType)) {
-                $creteOffer = Game::create($gameData);
-                if ($creteOffer) {
+                $creteVideo = VideoList::create($videoData);
+                if ($creteVideo) {
                     return redirect()->back()->withSuccess('Successfully Created !');
                 } else {
-                    return view('createGames');
+                    return view('addVideo');
                 }
             } elseif (!empty($request->editType) && !empty($request->id) && $request->editType == "edit") { //edit section
-                $updateOffer = Game::where('id', $request->id)->update($gameData);
-                if ($updateOffer) {
+                $updateVideo = VideoList::where('id', $request->id)->update($videoData);
+                if ($updateVideo) {
                     return redirect()->back()->withSuccess('Successfully Update !');
                 } else {
-                    return view('createGames');
+                    return view('addVideo');
                 }
             }
         } else {
             if (!empty($request->type) && $request->type == "edit") {
-                $gameData = DB::table('games')->where('id', $request->id)->orderBy('id', 'desc')->first();
-                return view('createGames', ['gameData' => $gameData, 'type' => $request->type]);
+                $videoData = DB::table('video_listing')->where('id', $request->id)->orderBy('id', 'desc')->first();
+                return view('addVideo', ['videoData' => $videoData, 'type' => $request->type]);
             } else {
-                return view('createGames');
+                return view('addVideo');
             }
         }
     }
