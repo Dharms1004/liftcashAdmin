@@ -10,6 +10,7 @@ use App\Models\Banner;
 use App\Models\Heading;
 use DB;
 use Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
 
 class MiniBanner extends Controller
@@ -64,6 +65,8 @@ class MiniBanner extends Controller
                         ->withInput();
                 }
             }
+
+            File::ensureDirectoryExists(public_path('images/banners'));
 
             if (!empty($request->image)) {
                 $imageName = time() . 'banners.' . $request->image->extension();
@@ -140,6 +143,8 @@ class MiniBanner extends Controller
                 }
             }
 
+            File::ensureDirectoryExists(public_path('images/popup'));
+           
             if (!empty($request->image)) {
                 $imageName = time() . 'popup.' . $request->image->extension();
                 $request->image->move(public_path('images/popup'), $imageName);
@@ -151,16 +156,16 @@ class MiniBanner extends Controller
             if(empty($path)){
                 $path = $gameData->THUMBNAIL;
             }
-
+            
             $gameData = [
                 'HEADING' => $request->name,
                 'MESSAGE' => $request->message,
                 'THUMBNAIL' => $path ?? "",
                 'ACTION_URL' => $request->url,
-                'STATUS' => 1,
+                'STATUS' => $request->status,
+                'IS_BUTTON' => $request->is_botton,
                 'CREATED_ON' => date('Y-m-d H:i:s'),
             ];
-
 
             if (empty($request->editType)) {
                 $creteOffer = Heading::create($gameData);
@@ -179,7 +184,13 @@ class MiniBanner extends Controller
             }
         } else {
             $gameData = DB::table('headings')->first();
-            return view('createPopup', ['gameData' => $gameData, 'type' => 'edit']);
+            $paramData['gameData'] = $gameData;
+            // dd($paramData);
+            if(!empty($gameData)){
+                $paramData['type'] = 'edit';
+            }
+
+            return view('createPopup', $paramData);
             
         }
     }

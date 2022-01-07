@@ -13,6 +13,6 @@ class Heading extends Model
     public $timestamps = FALSE;
 
     protected $fillable = [
-        'HEADING','MESSAGE','THUMBNAIL','ACTION_URL', 'STATUS', 'CREATED_ON'
+        'HEADING','MESSAGE','THUMBNAIL','ACTION_URL', 'STATUS', 'IS_BUTTON', 'CREATED_ON'
     ];
 }
