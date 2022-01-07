@@ -85,8 +85,28 @@
                                             <input type="text" name="message" value="@if(!empty(old('name'))) {{ old('name') }} @else {{ !empty($gameData->MESSAGE) ? $gameData->MESSAGE : ''  }} @endif" class="form-control" i placeholder="Banner Name">
                                         </div>
                                         <div class="form-group">
-                                            <label for="exampleInputEmail1">Avtion Url</label>
+                                            <label for="exampleInputEmail1">Action Url</label>
                                             <input type="text" name="url" value="@if(!empty(old('url'))) {{ old('url') }} @else{{ !empty($gameData->ACTION_URL) ? $gameData->ACTION_URL : ''  }} @endif" class="form-control" i placeholder="Game Amount">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Status</label>
+                                            <select name="status" class="form-control select2 select2-danger select2-hidden-accessible" data-dropdown-css-class="select2-danger" style="width: 100%;" data-select2-id="12" tabindex="-1" aria-hidden="true">
+                                                <option selected="selected" data-select2-id="14">Select</option>
+                                                <option value="1" {{ !empty(old('status')) ? old('status') == 1 ? "selected" : ''  : ''  }} {{ !empty($gameData->STATUS) ? $gameData->STATUS == 1 ? "selected" : ''  : ''  }}>Active</option>
+                                                <option value="2" {{ !empty(old('status')) ? old('status') == 2 ? "selected" : ''  : ''  }} {{ !empty($gameData->STATUS) ? $gameData->STATUS == 2 ? "selected" : ''  : ''  }}>Inactive</option>
+
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Show Button</label>
+                                            <select name="is_botton" class="form-control select2 select2-danger select2-hidden-accessible" data-dropdown-css-class="select2-danger" style="width: 100%;" data-select2-id="12" tabindex="-1" aria-hidden="true">
+                                                <option selected="selected" data-select2-id="14">Select</option>
+                                                <option value="1" {{ !empty(old('is_botton')) ? old('is_botton') == 1 ? "selected" : ''  : ''  }} {{ !empty($gameData->IS_BUTTON) ? $gameData->IS_BUTTON == 1 ? "selected" : ''  : ''  }}>Yes</option>
+                                                <option value="2" {{ !empty(old('is_botton')) ? old('is_botton') == 2 ? "selected" : ''  : ''  }} {{ !empty($gameData->IS_BUTTON) ? $gameData->IS_BUTTON == 2 ? "selected" : ''  : ''  }}>No</option>
+
+
+                                            </select>
                                         </div>
 
                                         <div class="form-group">
