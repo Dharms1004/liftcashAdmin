@@ -77,6 +77,7 @@ Route::post('/createPopup', [App\Http\Controllers\MiniBanner::class, 'createPopu
 
 
     Route::get('/balancePatch', [App\Http\Controllers\BalancePatch::class, 'index'])->name('balancePatch');
+    Route::get('/diamondPatch', [App\Http\Controllers\DiamondPatch::class, 'index'])->name('diamondPatch');
 
 
 
