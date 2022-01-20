@@ -65,6 +65,8 @@ class VideoListing extends Controller
                 }
             }
 
+            File::ensureDirectoryExists(public_path('images/video'));
+
             if (!empty($request->image)) {
                 $imageName = time() . 'video.' . $request->image->extension();
                 $request->image->move(public_path('images/video'), $imageName);
