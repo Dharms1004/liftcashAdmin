@@ -10,6 +10,7 @@ use App\Models\VideoList;
 use DB;
 use Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\File;
 
 class VideoListing extends Controller
 {
