@@ -21,7 +21,7 @@ class Games extends Controller
     public function gameList(Request $request){
         $page = request()->page;
         $games = DB::table('games')->orderBy('id', 'desc');
-        // dd($promotion);
+    
         $gamedata = $games->simplePaginate(1000, ['*'], 'page', $page);
         $params = $request->all();
         $params['page'] = $page;
