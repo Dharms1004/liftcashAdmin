@@ -15,9 +15,9 @@ use App\Http\Controllers\Offers;
 |
 */
 
-// Route::get('/', function () {
-//     return view('auth.login');
-// });
+Route::get('/newLayout', function () {
+    return view('index');
+});
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('login');
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
