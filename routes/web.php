@@ -15,9 +15,9 @@ use App\Http\Controllers\Offers;
 |
 */
 
-// Route::get('/', function () {
-//     return view('auth.login');
-// });
+Route::get('/newLayout', function () {
+    return view('index');
+});
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('login');
 Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -75,6 +75,8 @@ Route::post('/createPopup', [App\Http\Controllers\MiniBanner::class, 'createPopu
     Route::match(array('GET', 'POST'), '/viewparticipants', [App\Http\Controllers\ManageQuestionController::class, 'viewparticipants'])->name('viewparticipants');
     Route::get('getExcelExport', [App\Http\Controllers\ManageQuestionController::class, 'getExcelExport'])->name('getExcelExport');
 
+    Route::get('/sendNotification', [App\Http\Controllers\PushNotification::class, 'index'])->name('sendNotification');
+    Route::post('/sendNotification', [App\Http\Controllers\PushNotification::class, 'index'])->name('sendNotification');
 
     Route::get('/balancePatch', [App\Http\Controllers\BalancePatch::class, 'index'])->name('balancePatch');
     Route::get('/diamondPatch', [App\Http\Controllers\DiamondPatch::class, 'index'])->name('diamondPatch');
