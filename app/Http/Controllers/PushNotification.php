@@ -34,7 +34,7 @@ class PushNotification extends Controller
                 ]);
                 
                 if ($validator->fails()) {
-                    return redirect('sendNotification')
+                    return redirect('pushNotification')
                         ->withErrors($validator)
                         ->withInput();
                 }
@@ -62,7 +62,7 @@ class PushNotification extends Controller
             $emailIds = explode('||', $request->user_list);
             $token = DB::table('users')->whereNotNull('FCM_TOKEN')->whereIn('SOCIAL_EMAIL', $emailIds)->pluck('FCM_TOKEN')->all();            
         }else{
-            $token = DB::table('users')->whereNotNull('FCM_TOKEN')->orWhere('FCM_TOKEN', '<>', " ")->pluck('FCM_TOKEN')->all();
+            $token = DB::table('users')->whereNotNull('FCM_TOKEN')->pluck('FCM_TOKEN')->all();
         }
         
         $optionBuilder = new OptionsBuilder();
