@@ -10,6 +10,10 @@ use DB;
 use Auth;
 use Illuminate\Support\Facades\Validator;
 use Log;
+use LaravelFCM\Message\OptionsBuilder;
+use LaravelFCM\Message\PayloadDataBuilder;
+use LaravelFCM\Message\PayloadNotificationBuilder;
+use FCM;
 
 class PushNotification extends Controller
 {
@@ -21,56 +25,27 @@ class PushNotification extends Controller
     public function index(Request $request)
     {
         if ($request->isMethod('post')) {
-            $validator = Validator::make($request->all(),  [
-                'heading' => 'required',
-                'message' => 'required',
-            ]);
-
-            if ($validator->fails()) {
-                return redirect('pushNotification')
-                    ->withErrors($validator)
-                    ->withInput();
-            }
-            $fcmUrl = config('firebase.fcm_url');
-
-            $apiKey = config('firebase.fcm_api_key');
-
-            $token= DB::table('users')->whereNotNull('FCM_TOKEN')->pluck('FCM_TOKEN')->all();
-
-            if (!empty($token)) {
-                $data = [
-                    "registration_ids" => $token,
-                    "notification" => [
-                        "title" => $request->heading,
-                        "body" => $request->message,  
-                    ]
-                ];
-                $RESPONSE = json_encode($data);
+            if ($request->isMethod('post')) {
+                $validator = Validator::make($request->all(),  [
+                    'heading' => 'required',
+                    'message' => 'required',
+                    'send_to' => 'required',
+                    'user_list' => 'required_if:send_to,2',
+                ]);
+                
+                if ($validator->fails()) {
+                    return redirect('pushNotification')
+                        ->withErrors($validator)
+                        ->withInput();
+                }
+    
+                $res = $this->sendToFCM($request);
+    
             
-                $headers = [
-                    'Authorization:key=' . $apiKey,
-                    'Content-Type: application/json',
-                ];            
-                // CURL
-                $ch = curl_init();
-                curl_setopt($ch, CURLOPT_URL, $fcmUrl);
-                curl_setopt($ch, CURLOPT_POST, true);
-                curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
-                curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
-                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-                curl_setopt($ch, CURLOPT_POSTFIELDS, $RESPONSE);
-        
-                $output = curl_exec($ch);      
-                curl_close($ch);
-                $res = json_decode($output);
-               
-                if ($res->success) {
-                    return redirect()->back()->withSuccess('Sent Successfully !');
+                if ($res) {
+                    return redirect()->back()->withSuccess($res['success']." sent ".$res['failure']." failed out of ".$res['success']+$res['failure'] );
                 }else{
-                    Log::info($output);
-                    return redirect()->back()->withErrors('Failed to send !');
+                    return view('pushNotification');
                 }
             }else{
                 return redirect()->back()->withErrors('Oops! No user found.');
@@ -79,5 +54,37 @@ class PushNotification extends Controller
             return view('pushNotification');
         }
 
+    }
+
+    private function sendToFCM($request){
+        // dd($request->all());
+        if($request->send_to == 2){
+            $emailIds = explode('||', $request->user_list);
+            $token = DB::table('users')->whereNotNull('FCM_TOKEN')->whereIn('SOCIAL_EMAIL', $emailIds)->pluck('FCM_TOKEN')->all();            
+        }else{
+            $token = DB::table('users')->whereNotNull('FCM_TOKEN')->pluck('FCM_TOKEN')->all();
+        }
+        
+        $optionBuilder = new OptionsBuilder();
+        $optionBuilder->setTimeToLive(60*20);
+        $notificationBuilder = new PayloadNotificationBuilder($request->heading);
+        $notificationBuilder->setBody($request->message)->setSound('default');
+        
+        $dataBuilder = new PayloadDataBuilder();
+        $dataBuilder->addData(['App' => 'Android']);
+        
+        $option = $optionBuilder->build();
+        $notification = $notificationBuilder->build();
+        $data = $dataBuilder->build();
+        $filteredTokens = array_filter($token);
+        
+        $downstreamResponse = FCM::sendTo($filteredTokens, $option, $notification, $data);
+
+        $res['success'] = $downstreamResponse->numberSuccess();
+        $res['failure'] = $downstreamResponse->numberFailure();
+        $res['modificstion'] = $downstreamResponse->numberModification();
+
+        return $res;
+        
     }
 }

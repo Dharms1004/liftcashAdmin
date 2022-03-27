@@ -5,11 +5,20 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '809f0fa69047f7e3956d7ed3c9f1d7bb54e41b33',
+        'reference' => '644f2e045beb43b4f00b1e4366b3f12a1d5e1e51',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
     'versions' => array(
+        'apility/laravel-fcm' => array(
+            'pretty_version' => 'v1.4.4',
+            'version' => '1.4.4.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../apility/laravel-fcm',
+            'aliases' => array(),
+            'reference' => 'e1484d3831f346d5dc03d64c742e53b6f500f33c',
+            'dev_requirement' => false,
+        ),
         'asm89/stack-cors' => array(
             'pretty_version' => 'v2.0.3',
             'version' => '2.0.3.0',
@@ -27,6 +36,12 @@
             'aliases' => array(),
             'reference' => 'dff976c2f3487d42c1db75a3b180e2b9f0e72ce0',
             'dev_requirement' => false,
+        ),
+        'brozot/laravel-fcm' => array(
+            'dev_requirement' => false,
+            'replaced' => array(
+                0 => '*',
+            ),
         ),
         'cordoval/hamcrest-php' => array(
             'dev_requirement' => true,
@@ -400,7 +415,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '809f0fa69047f7e3956d7ed3c9f1d7bb54e41b33',
+            'reference' => '644f2e045beb43b4f00b1e4366b3f12a1d5e1e51',
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(
