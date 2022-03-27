@@ -43,7 +43,7 @@ class PushNotification extends Controller
     
             
                 if ($res) {
-                    return redirect()->back()->withSuccess($res['success']." sent ".$res['failure']."failed out of ".$res['success']+$res['failure'] );
+                    return redirect()->back()->withSuccess($res['success']." sent ".$res['failure']." failed out of ".$res['success']+$res['failure'] );
                 }else{
                     return view('pushNotification');
                 }
@@ -57,16 +57,14 @@ class PushNotification extends Controller
     }
 
     private function sendToFCM($request){
-
+        // dd($request->all());
         if($request->send_to == 2){
             $emailIds = explode('||', $request->user_list);
-
-            $token = DB::table('users')->whereNotNull('FCM_TOKEN')->orWhere('FCM_TOKEN', '<>', " ")->whereIn('SOCIAL_EMAIL', $emailIds)->pluck('FCM_TOKEN')->all();
-            
+            $token = DB::table('users')->whereNotNull('FCM_TOKEN')->whereIn('SOCIAL_EMAIL', $emailIds)->pluck('FCM_TOKEN')->all();            
         }else{
             $token = DB::table('users')->whereNotNull('FCM_TOKEN')->orWhere('FCM_TOKEN', '<>', " ")->pluck('FCM_TOKEN')->all();
         }
-
+        
         $optionBuilder = new OptionsBuilder();
         $optionBuilder->setTimeToLive(60*20);
         $notificationBuilder = new PayloadNotificationBuilder($request->heading);
