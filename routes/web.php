@@ -81,5 +81,10 @@ Route::post('/createPopup', [App\Http\Controllers\MiniBanner::class, 'createPopu
     Route::get('/balancePatch', [App\Http\Controllers\BalancePatch::class, 'index'])->name('balancePatch');
     Route::get('/diamondPatch', [App\Http\Controllers\DiamondPatch::class, 'index'])->name('diamondPatch');
 
+    Route::get('/countryList', [App\Http\Controllers\Country::class, 'countryList'])->name('country-list');
+    // Route::get('/createGame', [App\Http\Controllers\Games::class, 'createGame'])->name('createGame');
+    // Route::post('/createGame', [App\Http\Controllers\Games::class, 'createGame'])->name('createGame');
+    Route::post('/updateCountryStatus', [App\Http\Controllers\Country::class, 'updateCountryStatus'])->name('updateCountryStatus');
+
 
 

@@ -32,6 +32,7 @@ class Offers extends Controller
 
     public function createOffer(Request $request)
     {
+        $country = DB::table('country')->where(['STATUS' => 1])->orderBy('ID', 'DESC')->get();
 
         if ($request->isMethod('post')) {
             $validator = Validator::make($request->all(),  [
@@ -94,6 +95,7 @@ class Offers extends Controller
                 if(empty($tumbPath)){
                     $tumbPath = $offerData->OFFER_THUMBNAIL;
                 }
+
                 $offerData = [
                     'OFFER_TYPE' => $request->offer_type,
                     'OFFER_DISPLAY_TYPE' => $request->offer_dis_type,
@@ -108,6 +110,7 @@ class Offers extends Controller
                     'OFFER_URL' => $request->offer_url,
                     'OFFER_OS' => $request->offer_os,
                     'OFFER_ORIGIN' => $request->offer_origin,
+                    'COUNTRY_ID' => $request->offer_country,
                     'CAP' => $request->offer_cap,
                     'FALLBACK_URL' => $request->fall_url,
                     'OFFER_INSTRUCTIONS' => $request->offer_ins,
@@ -133,6 +136,7 @@ class Offers extends Controller
                     'OFFER_URL' => $request->offer_url,
                     'OFFER_OS' => $request->offer_os,
                     'OFFER_ORIGIN' => $request->offer_origin,
+                    'COUNTRY_ID' => $request->offer_country,
                     'CAP' => $request->offer_cap,
                     'FALLBACK_URL' => $request->fall_url,
                     'OFFER_INSTRUCTIONS' => $request->offer_ins,
@@ -164,9 +168,9 @@ class Offers extends Controller
         } else {
             if (!empty($request->type) && $request->type == "edit") {
                 $offerData = DB::table('offer')->where('OFFER_ID', $request->offerId)->orderBy('OFFER_ID', 'desc')->first();
-                return view('createOffer', ['offerData' => $offerData, 'type' => $request->type]);
+                return view('createOffer', ['offerData' => $offerData,'countries' => $country , 'type' => $request->type]);
             } else {
-                return view('createOffer');
+                return view('createOffer', ['countries' => $country]);
             }
         }
     }
