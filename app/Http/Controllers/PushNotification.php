@@ -43,7 +43,7 @@ class PushNotification extends Controller
     
             
                 if ($res) {
-                    return redirect()->back()->withSuccess($res['success']." sent ".$res['failure']." failed out of ".$res['success']+$res['failure'] );
+                    return redirect()->back()->withSuccess("Sent Successfully.");
                 }else{
                     return view('pushNotification');
                 }
