@@ -178,6 +178,14 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
+                                            <label>Country</label>
+                                            <select name="offer_country" class="form-control select2 select2-danger select2-hidden-accessible" data-dropdown-css-class="select2-danger" style="width: 100%;" data-select2-id="12" tabindex="-1" aria-hidden="true">
+                                                @foreach($countries as $country )
+                                                    <option value="{{ $country->ID }}" {{ !empty(old('offer_country')) ? old('offer_country') == $offerData->COUNTRY_ID ? "selected" : ''  : ''  }} {{ !empty($country->ID) ? $country->ID == ($offerData->COUNTRY_ID ?? '') ? "selected" : ''  : ''  }}>{{ $country->NAME }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
                                             <label for="exampleInputEmail1">Offer Cap</label>
                                             <input type="text" name="offer_cap" value=" @if(!empty(old('offer_package'))) {{ old('offer_cap') }} @else {{ !empty($offerData->CAP) ? $offerData->CAP : ''  }} @endif" class="form-control" i placeholder="Offer Cap">
                                         </div>
