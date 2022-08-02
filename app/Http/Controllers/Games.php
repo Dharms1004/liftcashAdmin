@@ -58,6 +58,9 @@ class Games extends Controller
     }
 
     public function  createGame(Request $request){
+
+        $country = DB::table('country')->where(['STATUS' => 1])->orderBy('ID', 'DESC')->get();
+
         if ($request->isMethod('post')) {
             $validator = Validator::make($request->all(),  [
                 'name' => 'required',
@@ -94,6 +97,7 @@ class Games extends Controller
                     'name' => $request->name,
                     'image' => $path ?? "",
                     'url' => $request->url,
+                    'country_id' => $request->offer_country,
                     'status' => 1,
                     'created_at' => date('Y-m-d H:i:s'),
                 ];
@@ -102,6 +106,7 @@ class Games extends Controller
                     'name' => $request->name,
                     'image' => $path ?? "",
                     'url' => $request->url,
+                    'country_id' => $request->offer_country,
                     'status' => 1,
                     'created_at' => date('Y-m-d H:i:s'),
                 ];
@@ -126,9 +131,9 @@ class Games extends Controller
         } else {
             if (!empty($request->type) && $request->type == "edit") {
                 $gameData = DB::table('games')->where('id', $request->id)->orderBy('id', 'desc')->first();
-                return view('createGames', ['gameData' => $gameData, 'type' => $request->type]);
+                return view('createGames', ['gameData' => $gameData, 'countries' => $country, 'type' => $request->type]);
             } else {
-                return view('createGames');
+                return view('createGames', ['countries' => $country]);
             }
         }
     }
