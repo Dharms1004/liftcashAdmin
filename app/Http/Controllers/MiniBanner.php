@@ -47,6 +47,9 @@ class MiniBanner extends Controller
     }
 
     public function createBanner(Request $request){
+
+        $country = DB::table('country')->where(['STATUS' => 1])->orderBy('ID', 'DESC')->get();
+
         if ($request->isMethod('post')) {
             $validator = Validator::make($request->all(),  [
                 'name' => 'required',
@@ -85,6 +88,7 @@ class MiniBanner extends Controller
                     'HEADING' => $request->name,
                     'THUMBNAIL' => $path ?? "",
                     'ACTION_URL' => $request->url,
+                    'COUNTRY_ID' => $request->offer_country,
                     'STATUS' => 1,
                     'CREATED_ON' => date('Y-m-d H:i:s'),
                 ];
@@ -93,6 +97,7 @@ class MiniBanner extends Controller
                     'HEADING' => $request->name,
                     'THUMBNAIL' => $path ?? "",
                     'ACTION_URL' => $request->url,
+                    'COUNTRY_ID' => $request->offer_country,
                     'STATUS' => 1,
                     'CREATED_ON' => date('Y-m-d H:i:s'),
                 ];
@@ -117,12 +122,14 @@ class MiniBanner extends Controller
         } else {
             if (!empty($request->type) && $request->type == "edit") {
                 $gameData = DB::table('mini_banner')->where('id', $request->id)->orderBy('id', 'desc')->first();
-                return view('createBanner', ['gameData' => $gameData, 'type' => $request->type]);
+                return view('createBanner', ['gameData' => $gameData,'countries' => $country , 'type' => $request->type]);
             } else {
-                return view('createBanner');
+                return view('createBanner', ['countries' => $country]);
             }
         }
     }
+
+
     public function createPopup(Request $request){
         if ($request->isMethod('post')) {
             $validator = Validator::make($request->all(),  [
