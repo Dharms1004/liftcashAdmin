@@ -169,6 +169,43 @@
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-gamepad"></i>
                     <p>
+                    Manage Turnament
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                <li class="nav-item">
+                        <a href="{{ route('createTurnament') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Add Turnament</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('turnament-list') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Turnament List</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('team-list') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Team List</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('player-list') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Team Player List</p>
+                        </a>
+                    </li>
+                    
+                </ul>
+            </li>
+
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-gamepad"></i>
+                    <p>
                         Mini Banner
                         <i class="fas fa-angle-left right"></i>
                     </p>

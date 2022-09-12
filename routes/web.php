@@ -86,5 +86,15 @@ Route::post('/createPopup', [App\Http\Controllers\MiniBanner::class, 'createPopu
     // Route::post('/createGame', [App\Http\Controllers\Games::class, 'createGame'])->name('createGame');
     Route::post('/updateCountryStatus', [App\Http\Controllers\Country::class, 'updateCountryStatus'])->name('updateCountryStatus');
 
+    /** start added by Ashu */
+    Route::get('/turnamentList', [App\Http\Controllers\Turnaments::class, 'turnamentList'])->name('turnament-list');
+    Route::get('/teamList', [App\Http\Controllers\Turnaments::class, 'teamList'])->name('team-list');
+    Route::get('/playerList', [App\Http\Controllers\Turnaments::class, 'playerList'])->name('player-list');
+
+
+    Route::get('/createTurnament', [App\Http\Controllers\Turnaments::class, 'createTurnament'])->name('createTurnament');
+    Route::post('/createTurnament', [App\Http\Controllers\Turnaments::class, 'createTurnament'])->name('createTurnament');
+
+    /** end added by Ashu */
 
 
