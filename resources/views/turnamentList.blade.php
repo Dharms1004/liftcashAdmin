@@ -55,31 +55,29 @@
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th>Sl No.</th>
-                                                <th>TOUR_NAME</th>
-                                                <th>TOUR_DESCRIPTION</th>
-                                                <th>TOUR_PRIZE_MONEY</th>
-                                                <th>TOUR_PRIZE_TYPE</th>
-                                                <th>TOUR_STATUS</th>
-                                                <th>TOUR_MAX_TEAM_ALLOWED</th>
-                                                <th>TOUR_MIN_TEAM_REQUIRED</th>
-                                                <th>TOUR_MAX_PLAYERS_ALLOWED</th>
-                                                <th>TOUR_MIN_PLAYERS_REQUIRED</th>
-                                                <th>TOUR_LOGO</th>
-                                                <th>TOUR_BANNER</th>
+                                            <th>S No.</th>
+                                            <th>TOUR NAME</th>
+                                            <th>TOUR DESCRIPTION</th>
+                                            <th>TOUR PRIZE MONEY</th>
+                                            <th>TOUR PRIZE TYPE</th>
+                                            <th>TOUR STATUS</th>
+                                            <th>TOUR MAX TEAM ALLOWED</th>
+                                            <th>TOUR MIN TEAM REQUIRED</th>
+                                            <th>TOUR MAX PLAYERS ALLOWED</th>
+                                            <th>TOUR MIN PLAYERS REQUIRED</th>
+                                            <th>TOUR LOGO</th>
+                                            <th>TOUR BANNER</th>
+                                            <th>TOUR MINI BANNER</th>
+                                            <th>TOUR START TIME</th>
+                                            <th>TOUR END TIME</th>
+                                            <th>TOUR REGISTRATION START TIME</th>
+                                            <th>TOUR REGISTRATION END TIME</th>
+                                            <th>CREATED BY</th>
+                                            <th>UPDATED BY</th>
+                                            <th>CREATED AT</th>
+                                            <th>UPDATED AT</th>
 
-                                                <th>TOUR_MINI_BANNER</th>
-                                                <th>TOUR_START_TIME</th>
-                                                <th>TOUR_START_ENDTIME</th>
-                                                <th>TOUR_REGISTRATION_START_TIME</th>
-                                                <th>TOUR_REGISTRATION_START_ENDTIME</th>
-                                                <th>CREATED_BY</th>
-                                                <th>UPDATED_BY</th>
-
-                                                <th>CREATED_AT</th>
-                                                <th>UPDATED_AT</th>
-                                               
-                                                <th>Action</th>
+                                            <th>Action</th>
 
                                             </tr>
                                         </thead>
