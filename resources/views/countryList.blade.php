@@ -57,11 +57,12 @@
                                             <tr>
                                                 <th>S No.</th>
                                                 <th>Name</th>
-                                                <!-- <th>Thumbnail</th> -->
+                                                <th>Flag</th>
                                                 <!-- <th>Url</th> -->
                                                 <!-- <th>Status</th> -->
                                                 <!-- <th>Reccomended</th> -->
                                                 <th>Action</th>
+                                                <th>Edit</th>
 
                                             </tr>
                                         </thead>
@@ -71,6 +72,7 @@
                                             <tr>
                                                 <td>{{ $loop->iteration }} </td>
                                                 <td>{{ $country->NAME }}</td>
+                                                <td><img style="height:50px; width:100px" src="{{url('images/country/'.$country->FLAG)}}"></td>
                                                 @if($country->STATUS == 1)
                                                 <td><button type="button" data-offer-id="{{ $country->ID }}" class="btn btn-block btn-success btn-sm status">Active</button></td>
                                                 @elseif($country->STATUS == 0)
@@ -78,6 +80,7 @@
                                                 @else
                                                 <td>Null</td>
                                                 @endif
+                                                <td><a href="{{ route('createCountry') }}?type=edit&id={{ $country->ID }}" class="btn btn-app"><i class="fas fa-edit"></i> Edit</a></td>
                                                 
                                              </tr>
                                             @endforeach

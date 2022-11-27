@@ -118,7 +118,7 @@ class Turnaments extends Controller
                     'TOUR_MAX_PLAYERS_ALLOWED' => $request->max_players_allowed,
                     'TOUR_MIN_PLAYERS_REQUIRED' => $request->min_players_required,
                     'TOUR_START_TIME' => $request->start_time,
-                    'TOUR_START_ENDTIME' => $request->end_time,
+                    'TOUR_END_TIME' => $request->end_time,
                     'TOUR_REGISTRATION_START_TIME' => $request->reg_start_time,
 
                   
@@ -126,7 +126,7 @@ class Turnaments extends Controller
                     'TOUR_BANNER' => $pathBanner,
                     'TOUR_MINI_BANNER' => $pathMiniBanner,
 
-                    'TOUR_REGISTRATION_START_ENDTIME' => $request->reg_end_time,
+                    'TOUR_REGISTRATION_END_TIME' => $request->reg_end_time,
                     'CREATED_BY' => Auth::user()->name,
                     'UPDATED_BY' => Auth::user()->name,
                     'CREATED_AT' => date('Y-m-d H:i:s'),
@@ -144,7 +144,7 @@ class Turnaments extends Controller
                     'TOUR_MAX_PLAYERS_ALLOWED' => $request->max_players_allowed,
                     'TOUR_MIN_PLAYERS_REQUIRED' => $request->min_players_required,
                     'TOUR_START_TIME' => $request->start_time,
-                    'TOUR_START_ENDTIME' => $request->end_time,
+                    'TOUR_END_TIME' => $request->end_time,
                     'TOUR_REGISTRATION_START_TIME' => $request->reg_start_time,
 
                    // 'image' => $path ?? "",
@@ -153,7 +153,7 @@ class Turnaments extends Controller
                    'TOUR_BANNER' => $pathBanner,
                    'TOUR_MINI_BANNER' => $pathMiniBanner,
 
-                    'TOUR_REGISTRATION_START_ENDTIME' => $request->reg_end_time,
+                    'TOUR_REGISTRATION_END_TIME' => $request->reg_end_time,
                     'CREATED_BY' => Auth::user()->name,
                     'UPDATED_BY' => Auth::user()->name,
                     'CREATED_AT' => date('Y-m-d H:i:s'),

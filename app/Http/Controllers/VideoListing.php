@@ -41,7 +41,7 @@ class VideoListing extends Controller
             $status=3;
         }
 
-        $updateOffer = Game::where('id', $request->id)->update(['status' =>$status]);
+        $updateOffer = VideoList::where('id', $request->id)->update(['status' =>$status]);
         return $updateOffer;
     }
 
@@ -49,7 +49,7 @@ class VideoListing extends Controller
         if ($request->isMethod('post')) {
             $validator = Validator::make($request->all(),  [
                 'title' => 'required',
-                // 'image' => 'required',
+                'banner' => 'required',
                 'url' => 'required',
                 'video_url' => 'required',
             ]);
@@ -68,9 +68,9 @@ class VideoListing extends Controller
 
             File::ensureDirectoryExists(public_path('images/video'));
 
-            if (!empty($request->image)) {
-                $imageName = time() . 'video.' . $request->image->extension();
-                $request->image->move(public_path('images/video'), $imageName);
+            if (!empty($request->banner)) {
+                $imageName = time() . 'video.' . $request->banner->extension();
+                $request->banner->move(public_path('images/video'), $imageName);
                 $path =  $imageName;
             }
 
