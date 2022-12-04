@@ -169,7 +169,7 @@
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-gamepad"></i>
                     <p>
-                    Manage Turnament
+                    Manage Tournament
                         <i class="fas fa-angle-left right"></i>
                     </p>
                 </a>
@@ -177,13 +177,13 @@
                 <li class="nav-item">
                         <a href="{{ route('createTurnament') }}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
-                            <p>Add Turnament</p>
+                            <p>Add Tournament</p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('turnament-list') }}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
-                            <p>Turnament List</p>
+                            <p>Tournament List</p>
                         </a>
                     </li>
                     <li class="nav-item">

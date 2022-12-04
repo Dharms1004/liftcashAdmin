@@ -60,7 +60,7 @@ class Turnaments extends Controller
                 'description' => 'required',
                 'prize_money' => 'required',
             ]);
-
+            
             if ($validator->fails()) {
                 if (!empty($request->editType) && !empty($request->id) && $request->editType == "edit") {
                     return redirect()->to('createTurnament?type=edit&id=' . $request->id . '')
@@ -118,15 +118,15 @@ class Turnaments extends Controller
                     'TOUR_MAX_PLAYERS_ALLOWED' => $request->max_players_allowed,
                     'TOUR_MIN_PLAYERS_REQUIRED' => $request->min_players_required,
                     'TOUR_START_TIME' => $request->start_time,
-                    'TOUR_START_ENDTIME' => $request->end_time,
+                    'TOUR_END_TIME' => $request->end_time,
                     'TOUR_REGISTRATION_START_TIME' => $request->reg_start_time,
 
                   
-                    'TOUR_LOGO' => $pathLogo,
-                    'TOUR_BANNER' => $pathBanner,
-                    'TOUR_MINI_BANNER' => $pathMiniBanner,
+                    'TOUR_LOGO' => $pathLogo ?? "",
+                    'TOUR_BANNER' => $pathBanner ?? "",
+                    'TOUR_MINI_BANNER' => $pathMiniBanner ?? "",
 
-                    'TOUR_REGISTRATION_START_ENDTIME' => $request->reg_end_time,
+                    'TOUR_REGISTRATION_END_TIME' => $request->reg_end_time,
                     'CREATED_BY' => Auth::user()->name,
                     'UPDATED_BY' => Auth::user()->name,
                     'CREATED_AT' => date('Y-m-d H:i:s'),
@@ -144,16 +144,15 @@ class Turnaments extends Controller
                     'TOUR_MAX_PLAYERS_ALLOWED' => $request->max_players_allowed,
                     'TOUR_MIN_PLAYERS_REQUIRED' => $request->min_players_required,
                     'TOUR_START_TIME' => $request->start_time,
-                    'TOUR_START_ENDTIME' => $request->end_time,
+                    'TOUR_END_TIME' => $request->end_time,
                     'TOUR_REGISTRATION_START_TIME' => $request->reg_start_time,
 
-                   // 'image' => $path ?? "",
 
-                   'TOUR_LOGO' => $pathLogo,
-                   'TOUR_BANNER' => $pathBanner,
-                   'TOUR_MINI_BANNER' => $pathMiniBanner,
+                   'TOUR_LOGO' => $pathLogo ?? "",
+                   'TOUR_BANNER' => $pathBanner ?? "",
+                   'TOUR_MINI_BANNER' => $pathMiniBanner ?? "",
 
-                    'TOUR_REGISTRATION_START_ENDTIME' => $request->reg_end_time,
+                    'TOUR_REGISTRATION_END_TIME' => $request->reg_end_time,
                     'CREATED_BY' => Auth::user()->name,
                     'UPDATED_BY' => Auth::user()->name,
                     'CREATED_AT' => date('Y-m-d H:i:s'),
@@ -163,9 +162,8 @@ class Turnaments extends Controller
 
 
             if (empty($request->editType)) {
-              //  echo "<pre>"; print_r($tourData);
-               $creteTour = Turnament::create($tourData);
-              
+                $creteTour = Turnament::create($tourData);
+
                 if ($creteTour) {
                     return redirect()->back()->withSuccess('Successfully Created !');
                 } else {

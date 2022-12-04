@@ -28,9 +28,9 @@
                     <div class="row mb-2">
                         <div class="col-sm-3">
                             @if(!empty($type) && $type =="edit")
-                            <h1>Edit Turnament</h1>
+                            <h1>Edit Tournament</h1>
                             @else
-                            <h1>Create Turnament</h1>
+                            <h1>Create Tournament</h1>
                             @endif
 
                         </div>
@@ -38,9 +38,9 @@
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
                                 @if(!empty($type) && $type =="edit")
-                                <li class="breadcrumb-item active">Edit Turnament</li>
+                                <li class="breadcrumb-item active">Edit Tournament</li>
                                 @else
-                                <li class="breadcrumb-item active">Create Turnament</li>
+                                <li class="breadcrumb-item active">Create Tournament</li>
                                 @endif
 
                             </ol>
@@ -60,9 +60,9 @@
                                 <div class="card-header">
 
                                     @if(!empty($type) && $type =="edit")
-                                    <h3 class="card-title">Edit Turnament</h3>
+                                    <h3 class="card-title">Edit Tournament</h3>
                                     @else
-                                    <h3 class="card-title">Create Turnament</h3>
+                                    <h3 class="card-title">Create Tournament</h3>
                                     @endif
 
                                 </div>
@@ -172,19 +172,19 @@
 
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">End Time</label>
-                                            <input type="date" name="end_time" value="@if(!empty(old('end_time'))) {{ date("YYYY-dd-mm", strtotime(old('end_time'))) }}@else{{!empty($tourData->TOUR_START_ENDTIME)?date_format(date_create($tourData->TOUR_START_ENDTIME),"Y-m-d"):''}}@endif" class="form-control" i placeholder="TOUR_START_ENDTIME">
+                                            <input type="date" name="end_time" value="@if(!empty(old('end_time'))) {{ date("YYYY-dd-mm", strtotime(old('end_time'))) }}@else{{!empty($tourData->TOUR_END_TIME)?date_format(date_create($tourData->TOUR_END_TIME),"Y-m-d"):''}}@endif" class="form-control" i placeholder="TOUR_END_TIME">
                                         
                                         </div>
 
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Registration Start Time</label>
-                                            <input type="date" name="reg_start_time" value="@if(!empty(old('reg_start_time'))) {{ date("YYYY-dd-mm", strtotime(old('reg_start_time'))) }}@else{{!empty($tourData->TOUR_REGISTRATION_START_ENDTIME)?date_format(date_create($tourData->TOUR_REGISTRATION_START_TIME),"Y-m-d"):''}}@endif" class="form-control" i placeholder="TOUR_REGISTRATION_START_TIME">
+                                            <input type="date" name="reg_start_time" value="@if(!empty(old('reg_start_time'))) {{ date("YYYY-dd-mm", strtotime(old('reg_start_time'))) }}@else{{!empty($tourData->TOUR_REGISTRATION_START_TIME)?date_format(date_create($tourData->TOUR_REGISTRATION_START_TIME),"Y-m-d"):''}}@endif" class="form-control" i placeholder="TOUR_REGISTRATION_START_TIME">
                                         
                                         </div>
 
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Registration End Time</label>
-                                            <input type="date" name="reg_end_time" value="@if(!empty(old('reg_end_time'))) {{ date("YYYY-dd-mm", strtotime(old('reg_end_time'))) }}@else{{!empty($tourData->TOUR_REGISTRATION_START_ENDTIME)?date_format(date_create($tourData->TOUR_REGISTRATION_START_ENDTIME),"Y-m-d"):''}}@endif" class="form-control" i placeholder="TOUR_REGISTRATION_START_ENDTIME">
+                                            <input type="date" name="reg_end_time" value="@if(!empty(old('reg_end_time'))) {{ date("YYYY-dd-mm", strtotime(old('reg_end_time'))) }}@else{{!empty($tourData->TOUR_REGISTRATION_END_TIME)?date_format(date_create($tourData->TOUR_REGISTRATION_END_TIME),"Y-m-d"):''}}@endif" class="form-control" i placeholder="TOUR_REGISTRATION_END_TIME">
                                         
                                         </div>
                                     </div>

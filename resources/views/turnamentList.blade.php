@@ -26,12 +26,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Turnament List</h1>
+                            <h1>Tournament List</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                                <li class="breadcrumb-item active">Turnament List</li>
+                                <li class="breadcrumb-item active">Tournament List</li>
                             </ol>
                         </div>
                     </div>
@@ -48,17 +48,17 @@
 
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">All Turnament list</h3>
+                                    <h3 class="card-title">All Tournament list</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th>Sl No.</th>
-                                                <th>TOUR_NAME</th>
-                                                <th>TOUR_DESCRIPTION</th>
-                                                <th>TOUR_PRIZE_MONEY</th>
+                                                <th>S No.</th>
+                                                <th>TOUR NAME</th>
+                                                <th>TOUR DESCRIPTION</th>
+                                                <th>TOUR PRIZE MONEY</th>
                                                 <th>TOUR_PRIZE_TYPE</th>
                                                 <th>TOUR_STATUS</th>
                                                 <th>TOUR_MAX_TEAM_ALLOWED</th>
@@ -114,9 +114,9 @@
                                             @endif      
                                                </td>
                                                 <td>{{ $tournamentdata->TOUR_START_TIME }}</td>
-                                                <td>{{ $tournamentdata->TOUR_START_ENDTIME }}</td>
+                                                <td>{{ $tournamentdata->TOUR_END_TIME }}</td>
                                                 <td>{{ $tournamentdata->TOUR_REGISTRATION_START_TIME }}</td>
-                                                <td>{{ $tournamentdata->TOUR_REGISTRATION_START_ENDTIME }}</td>
+                                                <td>{{ $tournamentdata->TOUR_REGISTRATION_END_TIME }}</td>
                                                 <td>{{ $tournamentdata->CREATED_BY }}</td>
 
                                                 <td>{{ $tournamentdata->UPDATED_BY }}</td>
