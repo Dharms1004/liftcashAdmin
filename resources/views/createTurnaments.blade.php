@@ -165,6 +165,16 @@
                                         </div>
 
                                         <div class="form-group">
+                                            <label for="exampleInputEmail1">Organiser Name</label>
+                                            <input type="text" name="org_name" value="@if(!empty(old('org_name'))) {{ old('org_name') }} @else {{ !empty($tourData->ORG_NAME) ? $tourData->ORG_NAME : ''  }} @endif" class="form-control" i placeholder="Org name">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Organiser Contact</label>
+                                            <input type="text" name="org_contact" value="@if(!empty(old('org_contact'))) {{ old('org_contact') }} @else {{ !empty($tourData->ORG_CONTACT) ? $tourData->ORG_CONTACT : ''  }} @endif" class="form-control" i placeholder="Org contact">
+                                        </div>
+
+                                        <div class="form-group">
                                             <label for="exampleInputEmail1">Start Time</label>
                                             <input type="date" name="start_time" value="@if(!empty(old('start_time'))) {{ date("YYYY-dd-mm", strtotime(old('start_time'))) }}@else{{!empty($tourData->TOUR_START_TIME)?date_format(date_create($tourData->TOUR_START_TIME),"Y-m-d"):''}}@endif" class="form-control" i placeholder="TOUR_START_TIME">
                                         
