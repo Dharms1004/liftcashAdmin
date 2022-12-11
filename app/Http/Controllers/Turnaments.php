@@ -42,6 +42,19 @@ class Turnaments extends Controller
         return view('teamList', ['teamdata' => $teamdata, 'params' => $params]);
     }
 
+    public function teamListRegistered(Request $request){
+        $page = request()->page;
+
+        $tourId = $request->tour_id;
+        $team = DB::table('tr_tournament_registration as ttr')->select('ttt.*')->join('tr_tournament_team as ttt', 'ttr.TEAM_ID', '=', 'ttt.TEAM_ID')->where('ttr.TOUR_ID', $tourId)->orderBy('TEAM_ID', 'desc');
+        $teamdata = $team->simplePaginate(1000, ['*'], 'page', $page);
+        
+        $params = $request->all();
+        $params['page'] = $page;
+
+        return view('teamListTourReg', ['teamdata' => $teamdata, 'params' => $params]);
+    }
+
     public function playerList(Request $request){
         $page = request()->page;
         $player = DB::table('tr_team_player')->orderBy('PLAYER_ID', 'desc');
