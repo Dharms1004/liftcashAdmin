@@ -26,12 +26,12 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>Tournament List</h1>
+                            <h1>Team List</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
-                                <li class="breadcrumb-item active">Tournament List</li>
+                                <li class="breadcrumb-item active">Team List</li>
                             </ol>
                         </div>
                     </div>
@@ -48,84 +48,36 @@
 
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">All Tournament list</h3>
+                                    <h3 class="card-title">Registered Team list</h3>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                            <th>S No.</th>
-                                            <th>TOUR NAME</th>
-                                            <th>TOUR DESCRIPTION</th>
-                                            <th>TOUR PRIZE MONEY</th>
-                                            <th>TOUR PRIZE TYPE</th>
-                                            <th>TOUR STATUS</th>
-                                            <th>TOUR MAX TEAM ALLOWED</th>
-                                            <th>TOUR MIN TEAM REQUIRED</th>
-                                            <th>TOUR MAX PLAYERS ALLOWED</th>
-                                            <th>TOUR MIN PLAYERS REQUIRED</th>
-                                            <th>TOUR LOGO</th>
-                                            <th>TOUR BANNER</th>
-                                            <th>TOUR MINI BANNER</th>
-                                            <th>TOUR START TIME</th>
-                                            <th>TOUR END TIME</th>
-                                            <th>TOUR REGISTRATION START TIME</th>
-                                            <th>TOUR REGISTRATION END TIME</th>
-                                            <th>CREATED BY</th>
-                                            <th>UPDATED BY</th>
-                                            <th>CREATED AT</th>
-                                            <th>UPDATED AT</th>
-
-                                            <th>Action</th>
-                                            <th>View Teams</th>
+                                                <th>Sl No.</th>
+                                                <th>TEAM_NAME</th>
+                                                <th>TEAM_DESCRIPTION</th>
+                                                <th>TEAM_CONTACT</th>
+                                                <th>TEAM_STATUS</th>
+                                                <th>CREATED_BY</th>
+                                                
 
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @if(!empty($tournamentdata))
-                                            @foreach($tournamentdata as $tournamentdata)
+                                            @if(!empty($teamdata))
+                                            @foreach($teamdata as $teamdata)
                                             <tr>
                                                 <td>{{ $loop->iteration }} </td>
-                                                <td>{{ $tournamentdata->TOUR_NAME }}</td>
-                                                <td>{{ $tournamentdata->TOUR_DESCRIPTION }}</td>
-                                                <td>{{ $tournamentdata->TOUR_PRIZE_MONEY }}</td>
-                                                <td>{{ $tournamentdata->TOUR_PRIZE_TYPE }}</td>
-                                                <td>{{ $tournamentdata->TOUR_STATUS }}</td>
+                                                <td>{{ $teamdata->TEAM_NAME }}</td>
+                                                <td>{{ $teamdata->TEAM_DESCRIPTION }}</td>
+                                                <td>{{ $teamdata->TEAM_CONTACT }}</td>
+                                                <td>{{ $teamdata->TEAM_STATUS }}</td>
+                                                <td>{{ $teamdata->CREATED_BY }}</td>
 
-                                                <td>{{ $tournamentdata->TOUR_MAX_TEAM_ALLOWED }}</td>
-                                                <td>{{ $tournamentdata->TOUR_MIN_TEAM_REQUIRED }}</td>
-                                                <td>{{ $tournamentdata->TOUR_MAX_PLAYERS_ALLOWED }}</td>
-                                                <td>{{ $tournamentdata->TOUR_MIN_PLAYERS_REQUIRED }}</td>
-                                                <td>
-                                                @if(!empty($tournamentdata->TOUR_LOGO))
-                                            <img style="height:50px; width:100px" src="{{url('images/tournaments/'.$tournamentdata->TOUR_LOGO)}}">
-                                            @endif    
-                                                </td>
-                                                <td>
-                                                @if(!empty($tournamentdata->TOUR_BANNER))
-                                            <img style="height:50px; width:100px" src="{{url('images/tournaments/banner/'.$tournamentdata->TOUR_BANNER)}}">
-                                            @endif      
-                                                </td>
-                                                <td>
-                                                @if(!empty($tournamentdata->TOUR_MINI_BANNER))
-                                            <img style="height:50px; width:100px" src="{{url('images/tournaments/mini_banner/'.$tournamentdata->TOUR_MINI_BANNER)}}">
-                                            @endif      
-                                               </td>
-                                                <td>{{ $tournamentdata->TOUR_START_TIME }}</td>
-                                                <td>{{ $tournamentdata->TOUR_END_TIME }}</td>
-                                                <td>{{ $tournamentdata->TOUR_REGISTRATION_START_TIME }}</td>
-                                                <td>{{ $tournamentdata->TOUR_REGISTRATION_END_TIME }}</td>
-                                                <td>{{ $tournamentdata->CREATED_BY }}</td>
-
-                                                <td>{{ $tournamentdata->UPDATED_BY }}</td>
-
-                                                <td>{{ $tournamentdata->CREATED_AT }}</td>
-                                                <td>{{ $tournamentdata->UPDATED_AT }}</td>
-
-                                                <td><a href="{{ route('createTurnament') }}?type=edit&id={{ $tournamentdata->TOUR_ID }}" class="btn btn-app"><i class="fas fa-edit"></i> Edit</a></td>
-                                                <td><a href="{{ route('registered-Team-List') }}?&tour_id={{ $tournamentdata->TOUR_ID }}" class="btn btn-app"><i class="fas fa-eye"></i>Registered Teams</a></td>
-                                            </tr>
+                                               
+                                                  </tr>
                                             @endforeach
                                             @endif
                                         </tbody>
