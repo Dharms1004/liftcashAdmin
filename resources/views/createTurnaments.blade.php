@@ -197,6 +197,24 @@
                                             <input type="date" name="reg_end_time" value="@if(!empty(old('reg_end_time'))) {{ date("YYYY-dd-mm", strtotime(old('reg_end_time'))) }}@else{{!empty($tourData->TOUR_REGISTRATION_END_TIME)?date_format(date_create($tourData->TOUR_REGISTRATION_END_TIME),"Y-m-d"):''}}@endif" class="form-control" i placeholder="TOUR_REGISTRATION_END_TIME">
                                         
                                         </div>
+
+                                        <div class="form-group" id="wrap-input">
+                                            <label for="example-select">Tournament Rules</label>
+                                            @if(!empty($tourData->TOUR_RULES))
+                                            @foreach(json_decode($tourData->TOUR_RULES) as $tourRules)
+                                            <div class="input-group "><input name="tour_rules[]" type="text" class="form-control username" value="{{ $tourRules }}" placeholder="Add Rules here" aria-label="Add Rules here" required>
+                                                <div class="input-group-append"><button type="button" id="add_field_button" class="btn btn-blue btn-xs waves-effect waves-light mr-1"><i class="fa fa-plus"></i> </button>
+                                                </div>
+                                            </div>&nbsp
+                                            @endforeach
+                                            @else
+                                            <div class="input-group "><input name="tour_rules[]" type="text" class="form-control username" value="" placeholder="Add Rules here" aria-label="Add Rules here" required>
+                                                <div class="input-group-append"><button type="button" id="add_field_button" class="btn btn-blue btn-xs waves-effect waves-light mr-1"><i class="fa fa-plus"></i> </button>
+                                                </div>
+
+                                            </div>&nbsp
+                                            @endif
+                                        </div>
                                     </div>
 
                             </div>
@@ -261,7 +279,7 @@
                 e.preventDefault();
                 if (x < max_fields) { //max input box allowed
                     x++; //text box increment
-                    $(wrapper).append('<div class="input-group"><input name="Game_steps[]" type="text" class="form-control username" placeholder="Game Steps " aria-label="Recipient`s username" required><div class="input-group-append"></button><button type="button" class="btn btn-danger btn-xs waves-effect waves-light remove_field"><i class="fa fa-trash"></i> </button></div><div class="invalid-feedback">Username Not exist..</div></div>&nbsp');
+                    $(wrapper).append('<div class="input-group"><input name="tour_rules[]" type="text" class="form-control username" placeholder="Add Rules here" aria-label="Add Rules here" required><div class="input-group-append"></button><button type="button" class="btn btn-danger btn-xs waves-effect waves-light remove_field"><i class="fa fa-trash"></i> </button></div><div class="invalid-feedback">Username Not exist..</div></div>&nbsp');
                 }
             });
 

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use App\Models\Promotions;
 use App\Models\Turnament;
+use App\Models\TourTeam;
+use App\Models\TourWinner;
 use DB;
 use Auth;
 use Illuminate\Support\Facades\Validator;
@@ -68,6 +70,8 @@ class Turnaments extends Controller
 
     public function  createTurnament(Request $request){
         if ($request->isMethod('post')) {
+            $rules = json_encode($request->tour_rules,JSON_FORCE_OBJECT);
+            
             $validator = Validator::make($request->all(),  [
                 'name' => 'required',
                 'description' => 'required',
@@ -146,6 +150,7 @@ class Turnaments extends Controller
                     'UPDATED_BY' => Auth::user()->name,
                     'CREATED_AT' => date('Y-m-d H:i:s'),
                     'UPDATED_AT' => date('Y-m-d H:i:s'),
+                    'TOUR_RULES' => $rules,
                 ];
             } else {
                 $tourData = [
@@ -174,6 +179,7 @@ class Turnaments extends Controller
                     'UPDATED_BY' => Auth::user()->name,
                     'CREATED_AT' => date('Y-m-d H:i:s'),
                     'UPDATED_AT' => date('Y-m-d H:i:s'),
+                    'TOUR_RULES' => $rules,
                 ];
             }
 
@@ -204,9 +210,74 @@ class Turnaments extends Controller
         }
     }
 
-    
 
-    
+    public function announceWinner(Request $request){
 
-    
+        $finishedTournaments = Turnament::select('TOUR_ID', 'TOUR_NAME')->where('TOUR_END_TIME', "<", date('Y-m-d H:i:s'))->get();
+        $tournamentTeams = TourTeam::select('TEAM_ID', 'TEAM_NAME')->where('TEAM_STATUS', 1)->get();
+        $params = $request->all();
+        $params['page'] = $page =1;
+
+        if ($request->isMethod('post')) {
+
+            $validator = Validator::make($request->all(),  [
+                'tournament_id' => 'required',
+                'winner_one' => 'required',
+                'winner_one_rank' => 'required',
+                'winner_one_prize' => 'required',
+                'winner_two' => 'required',
+                'winner_two_rank' => 'required',
+                'winner_two_prize' => 'required',
+                'winner_three' => 'required',
+                'winner_three_rank' => 'required',
+                'winner_three_prize' => 'required',
+            ]);
+            
+            if ($validator->fails()) {
+                    return redirect('addWinner')
+                        ->withErrors($validator)
+                        ->withInput();
+            }
+           
+            $winnerData= [[
+                'TOUR_ID' => $request->tournament_id,
+                'TEAM_ID' => $request->winner_one,
+                'RANK' => $request->winner_one_rank,
+                'PRIZE_MONEY' => $request->winner_one_prize,
+                'CREATED_BY' => Auth::user()->name,
+                'CREATED_ON' => date('Y-m-d H:i:s')
+            ],
+            [
+                'TOUR_ID' => $request->tournament_id,
+                'TEAM_ID' => $request->winner_two,
+                'RANK' => $request->winner_two_rank,
+                'PRIZE_MONEY' => $request->winner_two_prize,
+                'CREATED_BY' => Auth::user()->name,
+                'CREATED_ON' => date('Y-m-d H:i:s')
+            ],
+            [
+                'TOUR_ID' => $request->tournament_id,
+                'TEAM_ID' => $request->winner_three,
+                'RANK' => $request->winner_three_rank,
+                'PRIZE_MONEY' => $request->winner_three_prize,
+                'CREATED_BY' => Auth::user()->name,
+                'CREATED_ON' => date('Y-m-d H:i:s')
+            ]];
+            
+            foreach ($winnerData as  $value) {
+                $winnereCreated = TourWinner::create($value);
+            }
+
+            if($winnereCreated){
+                return redirect()->back()->withSuccess('Successfully Update !');
+            } else {
+                return view('winnerPage', ['tournamentList' => $finishedTournaments, 'tourTeamsList' => $tournamentTeams, 'params' => $params]);
+            }
+        }else{
+            return view('winnerPage', ['tournamentList' => $finishedTournaments, 'tourTeamsList' => $tournamentTeams, 'params' => $params]);
+        }
+
+
+    }
+
 }
