@@ -198,6 +198,12 @@
                             <p>Team Player List</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('add-winners') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Declare Tour Winners</p>
+                        </a>
+                    </li>
                     
                 </ul>
             </li>

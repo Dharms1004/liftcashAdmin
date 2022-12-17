@@ -92,6 +92,8 @@ Route::post('/createPopup', [App\Http\Controllers\MiniBanner::class, 'createPopu
     Route::get('/teamList', [App\Http\Controllers\Turnaments::class, 'teamList'])->name('team-list');
     Route::get('/playerList', [App\Http\Controllers\Turnaments::class, 'playerList'])->name('player-list');
     Route::get('/registeredTeamList', [App\Http\Controllers\Turnaments::class, 'teamListRegistered'])->name('registered-Team-List');
+    Route::get('/addWinner', [App\Http\Controllers\Turnaments::class, 'announceWinner'])->name('add-winners');
+    Route::post('/addWinner', [App\Http\Controllers\Turnaments::class, 'announceWinner'])->name('add-winners');
 
 
     Route::get('/createTurnament', [App\Http\Controllers\Turnaments::class, 'createTurnament'])->name('createTurnament');
