@@ -216,7 +216,6 @@ class Turnaments extends Controller
         $finishedTournaments = Turnament::select('TOUR_ID', 'TOUR_NAME')->where('TOUR_END_TIME', "<", date('Y-m-d H:i:s'))->get();
         $tournamentTeams = TourTeam::select('TEAM_ID', 'TEAM_NAME')->where('TEAM_STATUS', 1)->get();
         $params = $request->all();
-        $params['page'] = $page =1;
 
         if ($request->isMethod('post')) {
 
@@ -238,12 +237,55 @@ class Turnaments extends Controller
                         ->withErrors($validator)
                         ->withInput();
             }
+
+            //winner one
+
+            if (!empty($request->winner_one_logo)) {
+                $imageName = time() . 'teamLogo.' . $request->winner_one_logo->extension();
+                $request->winner_one_logo->move(public_path('images/team/logo'), $imageName);
+                $winOneLogo =  $imageName;
+            }
+
+            if (!empty($request->winner_one_image)) {
+                $bannerName = time() . 'teamImage.' . $request->winner_one_image->extension();
+                $request->winner_one_image->move(public_path('images/team/image'), $bannerName);
+                $winOneImage =  $bannerName;
+            }
+
+            //winner two 
+
+            if (!empty($request->winner_two_logo)) {
+                $imageName = time() . 'teamLogo.' . $request->winner_two_logo->extension();
+                $request->winner_two_image->move(public_path('images/team/logo'), $imageName);
+                $winTwoLogo =  $imageName;
+            }
+
+            if (!empty($request->winner_two_image)) {
+                $bannerName = time() . 'teamImage.' . $request->winner_two_image->extension();
+                $request->winner_two_image->move(public_path('images/team/image'), $bannerName);
+                $winTwoImage =  $bannerName;
+            }
+
+            //winner three
+            if (!empty($request->winner_three_logo)) {
+                $imageName = time() . 'teamLogo.' . $request->winner_three_logo->extension();
+                $request->winner_three_logo->move(public_path('images/team/logo'), $imageName);
+                $winThreeLogo =  $imageName;
+            }
+
+            if (!empty($request->winner_three_image)) {
+                $bannerName = time() . 'teamImage.' . $request->winner_three_image->extension();
+                $request->winner_three_image->move(public_path('images/team/image'), $bannerName);
+                $winThreeImage =  $bannerName;
+            }
            
             $winnerData= [[
                 'TOUR_ID' => $request->tournament_id,
                 'TEAM_ID' => $request->winner_one,
                 'RANK' => $request->winner_one_rank,
                 'PRIZE_MONEY' => $request->winner_one_prize,
+                'TEAM_LOGO' => $winOneLogo ?? "",
+                'TEAM_IMAGE' => $winOneImage ?? "",
                 'CREATED_BY' => Auth::user()->name,
                 'CREATED_ON' => date('Y-m-d H:i:s')
             ],
@@ -252,6 +294,8 @@ class Turnaments extends Controller
                 'TEAM_ID' => $request->winner_two,
                 'RANK' => $request->winner_two_rank,
                 'PRIZE_MONEY' => $request->winner_two_prize,
+                'TEAM_LOGO' => $winTwoLogo ?? "",
+                'TEAM_IMAGE' => $winTwoImage ?? "",
                 'CREATED_BY' => Auth::user()->name,
                 'CREATED_ON' => date('Y-m-d H:i:s')
             ],
@@ -260,6 +304,8 @@ class Turnaments extends Controller
                 'TEAM_ID' => $request->winner_three,
                 'RANK' => $request->winner_three_rank,
                 'PRIZE_MONEY' => $request->winner_three_prize,
+                'TEAM_LOGO' => $winThreeLogo ?? "",
+                'TEAM_IMAGE' => $winThreeImage ?? "",
                 'CREATED_BY' => Auth::user()->name,
                 'CREATED_ON' => date('Y-m-d H:i:s')
             ]];
