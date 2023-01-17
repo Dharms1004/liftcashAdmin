@@ -46,7 +46,7 @@
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <form id="create_questions"  action="{{ route('add-winners') }}" method="post">
+                                    <form id="create_questions"  action="{{ route('add-winners') }}" method="post" enctype="multipart/form-data">
                                        @csrf()
                                        <div class="row">
                                           <div class="form-group col-md-6">
@@ -91,7 +91,24 @@
                                              <input type="text" name="winner_one_prize" id="ques2_option_b" class="form-control @error("ques1.OPTION_B") error @enderror"  placeholder="Prize Money" value="{{ old("ques1.OPTION_B") }}">
                                              @error("ques1.OPTION_B") <label id="ques1.OPTION_B-error" class="error" for="ques1.OPTION_B">{{ $message }}</label> @enderror
                                           </div>
-
+                                          <div class="form-group col-md-3">
+                                            <label for="exampleInputFile">Team Logo</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" accept="image/*" name="winner_one_logo" value="" class="custom-file-input">
+                                                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                                </div>
+                                            </div>
+                                          </div>
+                                          <div class="form-group col-md-3">
+                                            <label for="exampleInputFile">Team Image</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" accept="image/*" name="winner_one_image" value="" class="custom-file-input">
+                                                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                                </div>
+                                            </div>
+                                          </div>
                                        </div>
                                        <div class="row">
                                           <div class="form-group col-md-12">
@@ -115,6 +132,24 @@
                                              <label>Prize Money: <span class="text-danger">*</span></label>
                                              <input type="text" name="winner_two_prize" id="ques2_option_B" class="form-control @error("ques2.OPTION_B") error @enderror"  placeholder="Prize Money" value="{{ old("ques2.OPTION_B") }}">
                                              @error("ques2.OPTION_B") <label id="ques2.OPTION_B-error" class="error" for="ques2.OPTION_B">{{ $message }}</label> @enderror
+                                          </div>
+                                          <div class="form-group col-md-3">
+                                            <label for="exampleInputFile">Team Logo</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" accept="image/*" name="winner_two_logo" value="" class="custom-file-input">
+                                                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                                </div>
+                                            </div>
+                                          </div>
+                                          <div class="form-group col-md-3">
+                                            <label for="exampleInputFile">Team Image</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" accept="image/*" name="winner_two_image" value="" class="custom-file-input">
+                                                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                                </div>
+                                            </div>
                                           </div>
                                        </div>
                                        <div class="row mb-2">
@@ -140,6 +175,24 @@
                                              <label>Prize Money: <span class="text-danger">*</span></label>
                                              <input type="text" name="winner_three_prize" id="ques3_option_b" class="form-control @error("ques3.OPTION_B") error @enderror"  placeholder="Prize Money" value="{{ old("ques3.OPTION_B") }}">
                                              @error("ques3.OPTION_B") <label id="ques3.OPTION_B-error" class="error" for="ques3.OPTION_B">{{ $message }}</label> @enderror
+                                          </div>
+                                          <div class="form-group col-md-3">
+                                            <label for="exampleInputFile">Team Logo</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" accept="image/*" name="winner_three_logo" value="" class="custom-file-input">
+                                                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                                </div>
+                                            </div>
+                                          </div>
+                                          <div class="form-group col-md-3">
+                                            <label for="exampleInputFile">Team Image</label>
+                                            <div class="input-group">
+                                                <div class="custom-file">
+                                                    <input type="file" accept="image/*" name="winner_three_image" value="" class="custom-file-input">
+                                                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                                </div>
+                                            </div>
                                           </div>
                                        </div>
                                        <button type="submit" id="submit_create_questions" class="btn btn-success waves-effect waves-light"
