@@ -12,7 +12,10 @@ use App\Models\TourWinner;
 use DB;
 use Auth;
 use Illuminate\Support\Facades\Validator;
-
+use LaravelFCM\Message\OptionsBuilder;
+use LaravelFCM\Message\PayloadDataBuilder;
+use LaravelFCM\Message\PayloadNotificationBuilder;
+use FCM;
 
 
 class Turnaments extends Controller
@@ -324,6 +327,58 @@ class Turnaments extends Controller
         }
 
 
+    }
+
+    public function sendNotification(Request $request){
+
+        
+        if ($request->isMethod('post')) {
+
+            $validator = Validator::make($request->all(),  [
+                'heading' => 'required',
+                'message' => 'required',
+                'tour_id' => 'required',
+            ]);
+            
+            if ($validator->fails()) {
+                return redirect('pushNotificationTour')
+                    ->withErrors($validator)
+                    ->withInput();
+            }
+
+            $token = DB::table('tr_tournament_registration as ttr')->join('tr_tournament_team as ttt', 'ttr.TEAM_ID', '=', 'ttt.TEAM_ID')->join('users as u', 'u.USER_ID', '=', 'ttt.USER_ID')->where('ttr.TOUR_ID', $request->tour_id)->whereNotNull('u.FCM_TOKEN')->pluck('u.FCM_TOKEN')->all();
+            
+            $optionBuilder = new OptionsBuilder();
+            $optionBuilder->setTimeToLive(60*20);
+            $notificationBuilder = new PayloadNotificationBuilder($request->heading);
+            $notificationBuilder->setBody($request->message)->setSound('default');
+            
+            $dataBuilder = new PayloadDataBuilder();
+            $dataBuilder->addData(['App' => 'Android']);
+            
+            $option = $optionBuilder->build();
+            $notification = $notificationBuilder->build();
+            $data = $dataBuilder->build();
+            $filteredTokens = array_filter($token);
+            
+            $downstreamResponse = FCM::sendTo($filteredTokens, $option, $notification, $data);
+    
+            $res['success'] = $downstreamResponse->numberSuccess();
+            $res['failure'] = $downstreamResponse->numberFailure();
+            $res['modificstion'] = $downstreamResponse->numberModification();
+            
+            if ($res['success']) {
+                return redirect()->back()->withSuccess("Sent Successfully.");
+            }else{
+                // return view('pushNotification');
+                return redirect()->back()->withErrors('Unable to send.');
+            }
+
+
+        }else {
+            $tourData = DB::table('tr_tournament')->select('TOUR_ID', 'TOUR_NAME')->where('TOUR_ID', $request->tour_id)->orderBy('TOUR_ID', 'desc')->first();
+            return view('pushNotificationTour', ['tourData' => $tourData]);
+        }
     }
 
 }
