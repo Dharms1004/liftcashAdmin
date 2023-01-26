@@ -94,11 +94,21 @@ Route::post('/createPopup', [App\Http\Controllers\MiniBanner::class, 'createPopu
     Route::get('/registeredTeamList', [App\Http\Controllers\Turnaments::class, 'teamListRegistered'])->name('registered-Team-List');
     Route::get('/addWinner', [App\Http\Controllers\Turnaments::class, 'announceWinner'])->name('add-winners');
     Route::post('/addWinner', [App\Http\Controllers\Turnaments::class, 'announceWinner'])->name('add-winners');
-
+    
 
     Route::get('/createTurnament', [App\Http\Controllers\Turnaments::class, 'createTurnament'])->name('createTurnament');
     Route::post('/createTurnament', [App\Http\Controllers\Turnaments::class, 'createTurnament'])->name('createTurnament');
-
     /** end added by Ashu */
+
+
+    /**
+     * Author : Dharminder Singh
+     * Module : Send notification to tournament users
+     * Date : 21/Jan/2023
+     */
+    Route::get('/sendNotificationTour', [App\Http\Controllers\Turnaments::class, 'sendNotification'])->name('sendNotificationTour');
+    Route::post('/sendNotificationTour', [App\Http\Controllers\Turnaments::class, 'sendNotification'])->name('sendNotificationTour');
+
+    
 
 

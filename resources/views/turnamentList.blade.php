@@ -56,6 +56,7 @@
                                         <thead>
                                             <tr>
                                             <th>S No.</th>
+                                            <th>Notification</th>
                                             <th>TOUR NAME</th>
                                             <th>TOUR DESCRIPTION</th>
                                             <th>TOUR PRIZE MONEY</th>
@@ -72,10 +73,10 @@
                                             <th>TOUR END TIME</th>
                                             <th>TOUR REGISTRATION START TIME</th>
                                             <th>TOUR REGISTRATION END TIME</th>
-                                            <th>CREATED BY</th>
+                                            <!-- <th>CREATED BY</th>
                                             <th>UPDATED BY</th>
                                             <th>CREATED AT</th>
-                                            <th>UPDATED AT</th>
+                                            <th>UPDATED AT</th> -->
 
                                             <th>Action</th>
                                             <th>View Teams</th>
@@ -87,8 +88,9 @@
                                             @foreach($tournamentdata as $tournamentdata)
                                             <tr>
                                                 <td>{{ $loop->iteration }} </td>
+                                                <td><a href="{{ route('sendNotificationTour') }}?tour_id={{ $tournamentdata->TOUR_ID }}">Send Notification</a></td>
                                                 <td>{{ $tournamentdata->TOUR_NAME }}</td>
-                                                <td>{{ $tournamentdata->TOUR_DESCRIPTION }}</td>
+                                                <td>{{ substr($tournamentdata->TOUR_DESCRIPTION ,0,15)}}</td>
                                                 <td>{{ $tournamentdata->TOUR_PRIZE_MONEY }}</td>
                                                 <td>{{ $tournamentdata->TOUR_PRIZE_TYPE }}</td>
                                                 <td>{{ $tournamentdata->TOUR_STATUS }}</td>
@@ -116,12 +118,12 @@
                                                 <td>{{ $tournamentdata->TOUR_END_TIME }}</td>
                                                 <td>{{ $tournamentdata->TOUR_REGISTRATION_START_TIME }}</td>
                                                 <td>{{ $tournamentdata->TOUR_REGISTRATION_END_TIME }}</td>
-                                                <td>{{ $tournamentdata->CREATED_BY }}</td>
+                                                <!-- <td>{{ $tournamentdata->CREATED_BY }}</td>
 
                                                 <td>{{ $tournamentdata->UPDATED_BY }}</td>
 
                                                 <td>{{ $tournamentdata->CREATED_AT }}</td>
-                                                <td>{{ $tournamentdata->UPDATED_AT }}</td>
+                                                <td>{{ $tournamentdata->UPDATED_AT }}</td> -->
 
                                                 <td><a href="{{ route('createTurnament') }}?type=edit&id={{ $tournamentdata->TOUR_ID }}" class="btn btn-app"><i class="fas fa-edit"></i> Edit</a></td>
                                                 <td><a href="{{ route('registered-Team-List') }}?&tour_id={{ $tournamentdata->TOUR_ID }}" class="btn btn-app"><i class="fas fa-eye"></i>Registered Teams</a></td>
