@@ -109,6 +109,14 @@ Route::post('/createPopup', [App\Http\Controllers\MiniBanner::class, 'createPopu
     Route::get('/sendNotificationTour', [App\Http\Controllers\Turnaments::class, 'sendNotification'])->name('sendNotificationTour');
     Route::post('/sendNotificationTour', [App\Http\Controllers\Turnaments::class, 'sendNotification'])->name('sendNotificationTour');
 
+        /**
+     * Author : Dharminder Singh
+     * Module : Add Tournament Rules from excel file
+     * Date : 27/Jan/2023
+     */
+    Route::get('/addTourRules', [App\Http\Controllers\Turnaments::class, 'addTournamentRules'])->name('addTourRules');
+    Route::post('/addTourRules', [App\Http\Controllers\Turnaments::class, 'addTournamentRules'])->name('addTourRules');
+
     
 
 

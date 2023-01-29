@@ -176,25 +176,25 @@
 
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Start Time</label>
-                                            <input type="datetime-local" name="start_time" value="@if(!empty(old('start_time'))) {{ date("YYYY-dd-mm", strtotime(old('start_time'))) }}@else{{!empty($tourData->TOUR_START_TIME)?date_format(date_create($tourData->TOUR_START_TIME),"Y-m-d"):''}}@endif" class="form-control" i placeholder="TOUR_START_TIME">
+                                            <input type="datetime-local" name="start_time" value="@if(!empty(old('start_time'))) {{ date("YYYY-dd-mm", strtotime(old('start_time'))) }}@else{{!empty($tourData->TOUR_START_TIME)?\Carbon\Carbon::parse($tourData->TOUR_START_TIME)->format('Y-m-d\TH:i'):''}}@endif" class="form-control" i placeholder="TOUR_START_TIME">
                                         
                                         </div>
 
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">End Time</label>
-                                            <input type="datetime-local" name="end_time" value="@if(!empty(old('end_time'))) {{ date("YYYY-dd-mm", strtotime(old('end_time'))) }}@else{{!empty($tourData->TOUR_END_TIME)?date_format(date_create($tourData->TOUR_END_TIME),"Y-m-d"):''}}@endif" class="form-control" i placeholder="TOUR_END_TIME">
+                                            <input type="datetime-local" name="end_time" value="@if(!empty(old('end_time'))) {{ date("YYYY-dd-mm", strtotime(old('end_time'))) }}@else{{!empty($tourData->TOUR_END_TIME)?\Carbon\Carbon::parse($tourData->TOUR_END_TIME)->format('Y-m-d\TH:i'):''}}@endif" class="form-control" i placeholder="TOUR_END_TIME">
                                         
                                         </div>
 
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Registration Start Time</label>
-                                            <input type="datetime-local" name="reg_start_time" value="@if(!empty(old('reg_start_time'))) {{ date("YYYY-dd-mm", strtotime(old('reg_start_time'))) }}@else{{!empty($tourData->TOUR_REGISTRATION_START_TIME)?date_format(date_create($tourData->TOUR_REGISTRATION_START_TIME),"Y-m-d"):''}}@endif" class="form-control" i placeholder="TOUR_REGISTRATION_START_TIME">
+                                            <input type="datetime-local" name="reg_start_time" value="@if(!empty(old('reg_start_time'))) {{ date("YYYY-dd-mm", strtotime(old('reg_start_time'))) }}@else{{!empty($tourData->TOUR_REGISTRATION_START_TIME)?\Carbon\Carbon::parse($tourData->TOUR_REGISTRATION_START_TIME)->format('Y-m-d\TH:i'):''}}@endif" class="form-control" i placeholder="TOUR_REGISTRATION_START_TIME">
                                         
                                         </div>
 
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Registration End Time</label>
-                                            <input type="datetime-local" name="reg_end_time" value="@if(!empty(old('reg_end_time'))) {{ date("YYYY-dd-mm", strtotime(old('reg_end_time'))) }}@else{{!empty($tourData->TOUR_REGISTRATION_END_TIME)?date_format(date_create($tourData->TOUR_REGISTRATION_END_TIME),"Y-m-d"):''}}@endif" class="form-control" i placeholder="TOUR_REGISTRATION_END_TIME">
+                                            <input type="datetime-local" name="reg_end_time" value="@if(!empty(old('reg_end_time'))) {{ date("YYYY-dd-mm", strtotime(old('reg_end_time'))) }}@else{{!empty($tourData->TOUR_REGISTRATION_END_TIME)? \Carbon\Carbon::parse($tourData->TOUR_REGISTRATION_END_TIME)->format('Y-m-d\TH:i') :''}}@endif" class="form-control" i placeholder="TOUR_REGISTRATION_END_TIME">
                                         
                                         </div>
 

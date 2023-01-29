@@ -181,6 +181,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="{{ route('addTourRules') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Add Tournament Rules</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ route('turnament-list') }}" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Tournament List</p>

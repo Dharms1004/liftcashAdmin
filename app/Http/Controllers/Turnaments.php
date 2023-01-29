@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Validator;
 use LaravelFCM\Message\OptionsBuilder;
 use LaravelFCM\Message\PayloadDataBuilder;
 use LaravelFCM\Message\PayloadNotificationBuilder;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\UserImport;
+use Maatwebsite\Excel\Importer;
 use FCM;
 
 
@@ -330,7 +333,6 @@ class Turnaments extends Controller
     }
 
     public function sendNotification(Request $request){
-
         
         if ($request->isMethod('post')) {
 
@@ -378,6 +380,36 @@ class Turnaments extends Controller
         }else {
             $tourData = DB::table('tr_tournament')->select('TOUR_ID', 'TOUR_NAME')->where('TOUR_ID', $request->tour_id)->orderBy('TOUR_ID', 'desc')->first();
             return view('pushNotificationTour', ['tourData' => $tourData]);
+        }
+    }
+
+    public function addTournamentRules(Request $request, Importer $importer){
+        $tournaments = Turnament::select('TOUR_ID', 'TOUR_NAME')->where('TOUR_START_TIME', ">=", date('Y-m-d H:i:s'))->get();
+        if ($request->isMethod('post')) {
+            $validator = Validator::make($request->all(),  [
+                'tour_id' => 'required',
+                'rules' => 'required',
+            ]);
+            
+            if ($validator->fails()) {
+                return redirect('addTourRules')
+                    ->withErrors($validator)
+                    ->withInput();
+            }
+            $importer->import($data = new UserImport, $request->rules);
+            $rules = json_encode($data->data,JSON_FORCE_OBJECT);
+            if (!empty($rules)) {
+                $res = Turnament::where('TOUR_ID', $request->tour_id)
+                            ->update([
+                                'TOUR_RULES' => $rules
+                            ]);
+                return redirect()->back()->withSuccess('Rules added Successfully!');
+            }else{
+                return view('addTourRules', ['tournamentList' => $tournaments]);
+            }
+        }else{
+            // $tournaments = Turnament::select('TOUR_ID', 'TOUR_NAME')->where('TOUR_START_TIME', ">=", date('Y-m-d H:i:s'))->get();
+            return view('addTourRules', ['tournamentList' => $tournaments]);
         }
     }
 
