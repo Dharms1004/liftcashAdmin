@@ -56,7 +56,7 @@
                         <!-- left column -->
                         <div class="col-md-12">
                             <!-- general form elements -->
-                            <div class="card card-primary">
+                            <div class="card card-default">
                                 <div class="card-header">
 
                                     @if(!empty($type) && $type =="edit")
@@ -76,6 +76,16 @@
                                     <input type="hidden" name="id" value="{{ !empty($tourData->TOUR_ID) ? $tourData->TOUR_ID : ''  }}">
                                     @endif
                                     <div class="card-body">
+
+                                        <div class="form-group">
+                                            <label>Tournament Type</label>
+                                            <select name="tour_type" class="form-control select2 select2-danger select2-hidden-accessible" data-dropdown-css-class="select2-danger" style="width: 100%;" data-select2-id="12" tabindex="-1" aria-hidden="true">
+                                                <option selected="selected" data-select2-id="14">Select</option>
+                                                <option value="1" {{ !empty(old('tour_type')) ? old('tour_type') == 1 ? "selected" : ''  : ''  }} {{ !empty($tourData->TOUR_TYPE) ? $tourData->TOUR_TYPE == 1 ? "selected" : ''  : ''  }}>Solo</option>
+                                                <option value="2" {{ !empty(old('tour_type')) ? old('tour_type') == 2 ? "selected" : ''  : ''  }} {{ !empty($tourData->TOUR_TYPE) ? $tourData->TOUR_TYPE == 2 ? "selected" : ''  : ''  }}>Team</option>
+
+                                            </select>
+                                        </div>
 
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Name</label>

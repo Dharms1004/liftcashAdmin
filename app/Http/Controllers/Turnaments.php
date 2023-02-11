@@ -82,6 +82,7 @@ class Turnaments extends Controller
                 'name' => 'required',
                 'description' => 'required',
                 'prize_money' => 'required',
+                'tour_type' => 'required',
             ]);
             
             if ($validator->fails()) {
@@ -132,6 +133,7 @@ class Turnaments extends Controller
 
                 $tourData = [
                     'TOUR_NAME' => $request->name,
+                    'TOUR_TYPE' => $request->tour_type,
                     'TOUR_DESCRIPTION' => $request->description,
                     'TOUR_PRIZE_MONEY' => $request->prize_money,
                     'TOUR_PRIZE_TYPE' => $request->prize_type,
@@ -161,6 +163,7 @@ class Turnaments extends Controller
             } else {
                 $tourData = [
                     'TOUR_NAME' => $request->name,
+                    'TOUR_TYPE' => $request->tour_type,
                     'TOUR_DESCRIPTION' => $request->description,
                     'TOUR_PRIZE_MONEY' => $request->prize_money,
                     'TOUR_PRIZE_TYPE' => $request->prize_type,
@@ -191,8 +194,9 @@ class Turnaments extends Controller
 
 
             if (empty($request->editType)) {
+                // dd($tourData);
                 $creteTour = Turnament::create($tourData);
-
+                // dd($creteTour);
                 if ($creteTour) {
                     return redirect()->back()->withSuccess('Successfully Created !');
                 } else {
@@ -378,7 +382,7 @@ class Turnaments extends Controller
 
 
         }else {
-            $tourData = DB::table('tr_tournament')->select('TOUR_ID', 'TOUR_NAME')->where('TOUR_ID', $request->tour_id)->orderBy('TOUR_ID', 'desc')->first();
+            $tourData = DB::table('tr_tournament')->select('TOUR_ID', 'TOUR_NAME', 'TOUR_TYPE')->where('TOUR_ID', $request->tour_id)->orderBy('TOUR_ID', 'desc')->first();
             return view('pushNotificationTour', ['tourData' => $tourData]);
         }
     }
@@ -408,7 +412,6 @@ class Turnaments extends Controller
                 return view('addTourRules', ['tournamentList' => $tournaments]);
             }
         }else{
-            // $tournaments = Turnament::select('TOUR_ID', 'TOUR_NAME')->where('TOUR_START_TIME', ">=", date('Y-m-d H:i:s'))->get();
             return view('addTourRules', ['tournamentList' => $tournaments]);
         }
     }
