@@ -247,6 +247,48 @@
                             <p>Push Notification</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('addJokeCategory') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Manage Jokes</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-gamepad"></i>
+                    <p>
+                        Manage Jokes
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ route('joke-list') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Joke List</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('addJoke') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Add Jokes</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('addJokeCategory') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Add Jokes Category</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('joke-cat-list') }}" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Joke Category List</p>
+                        </a>
+                    </li>
                 </ul>
             </li>
 

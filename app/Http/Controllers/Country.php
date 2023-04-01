@@ -37,8 +37,6 @@ class Country extends Controller
             $status=0;
         }else if($gameData->STATUS==0){
             $status=1;
-        }else{
-            $status=0;
         }
 
         $updateOffer = ModelsCountry::where('ID', $request->id)->update(['STATUS' =>$status]);
@@ -46,7 +44,7 @@ class Country extends Controller
     }
 
     public function  createCountry(Request $request){
-        // dd($request->all());
+       
         if ($request->isMethod('post')) {
             $validator = Validator::make($request->all(),  [
                 'name' => 'required',
