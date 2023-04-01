@@ -67,8 +67,8 @@
                                             <th>TOUR MAX PLAYERS ALLOWED</th>
                                             <th>TOUR MIN PLAYERS REQUIRED</th>
                                             <th>TOUR LOGO</th>
-                                            <th>TOUR BANNER</th>
-                                            <th>TOUR MINI BANNER</th>
+                                            <!-- <th>TOUR BANNER</th> -->
+                                            <!-- <th>TOUR MINI BANNER</th> -->
                                             <th>TOUR START TIME</th>
                                             <th>TOUR END TIME</th>
                                             <th>TOUR REGISTRATION START TIME</th>
@@ -78,6 +78,7 @@
                                             <th>CREATED AT</th>
                                             <th>UPDATED AT</th> -->
 
+                                            <th>Addition</th>
                                             <th>Action</th>
                                             <th>View Teams</th>
 
@@ -104,16 +105,16 @@
                                             <img style="height:50px; width:100px" src="{{url('images/tournaments/'.$tournamentdata->TOUR_LOGO)}}">
                                             @endif    
                                                 </td>
-                                                <td>
+                                                <!-- <td>
                                                 @if(!empty($tournamentdata->TOUR_BANNER))
                                             <img style="height:50px; width:100px" src="{{url('images/tournaments/banner/'.$tournamentdata->TOUR_BANNER)}}">
                                             @endif      
-                                                </td>
-                                                <td>
+                                                </td> -->
+                                                <!-- <td>
                                                 @if(!empty($tournamentdata->TOUR_MINI_BANNER))
                                             <img style="height:50px; width:100px" src="{{url('images/tournaments/mini_banner/'.$tournamentdata->TOUR_MINI_BANNER)}}">
                                             @endif      
-                                               </td>
+                                               </td> -->
                                                 <td>{{ $tournamentdata->TOUR_START_TIME }}</td>
                                                 <td>{{ $tournamentdata->TOUR_END_TIME }}</td>
                                                 <td>{{ $tournamentdata->TOUR_REGISTRATION_START_TIME }}</td>
@@ -124,7 +125,7 @@
 
                                                 <td>{{ $tournamentdata->CREATED_AT }}</td>
                                                 <td>{{ $tournamentdata->UPDATED_AT }}</td> -->
-
+                                                <td><a href="{{ route('addRoom') }}?tour_id={{ $tournamentdata->TOUR_ID }}">Add Room ID</a></td>
                                                 <td><a href="{{ route('createTurnament') }}?type=edit&id={{ $tournamentdata->TOUR_ID }}" class="btn btn-app"><i class="fas fa-edit"></i> Edit</a></td>
                                                 <td><a href="{{ route('registered-Team-List') }}?&tour_id={{ $tournamentdata->TOUR_ID }}" class="btn btn-app"><i class="fas fa-eye"></i>Registered Teams</a></td>
                                             </tr>

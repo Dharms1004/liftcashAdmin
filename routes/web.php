@@ -109,13 +109,35 @@ Route::post('/createPopup', [App\Http\Controllers\MiniBanner::class, 'createPopu
     Route::get('/sendNotificationTour', [App\Http\Controllers\Turnaments::class, 'sendNotification'])->name('sendNotificationTour');
     Route::post('/sendNotificationTour', [App\Http\Controllers\Turnaments::class, 'sendNotification'])->name('sendNotificationTour');
 
-        /**
+    Route::get('/addRoom', [App\Http\Controllers\Turnaments::class, 'addRoom'])->name('addRoom');
+    Route::post('/addRoom', [App\Http\Controllers\Turnaments::class, 'addRoom'])->name('addRoom');
+
+    /**
      * Author : Dharminder Singh
      * Module : Add Tournament Rules from excel file
      * Date : 27/Jan/2023
      */
     Route::get('/addTourRules', [App\Http\Controllers\Turnaments::class, 'addTournamentRules'])->name('addTourRules');
     Route::post('/addTourRules', [App\Http\Controllers\Turnaments::class, 'addTournamentRules'])->name('addTourRules');
+
+
+    /**
+     * Author : Dharminder Singh
+     * Module : Adding jokes category and jokes
+     * Date : 10/March/2023
+     */
+    Route::get('/addJoke', [App\Http\Controllers\Jokes::class, 'index'])->name('addJoke');
+    Route::post('/addJoke', [App\Http\Controllers\Jokes::class, 'index'])->name('addJoke');
+    Route::get('/jokesList', [App\Http\Controllers\Jokes::class, 'jokeList'])->name('joke-list');
+    Route::post('/updateJokeStatus', [App\Http\Controllers\Jokes::class, 'updateJokeStatus'])->name('updateJokeStatus');
+
+
+    Route::get('/addJokeCategory', [App\Http\Controllers\Jokes::class, 'addJokeCat'])->name('addJokeCategory');
+    Route::post('/addJokeCategory', [App\Http\Controllers\Jokes::class, 'addJokeCat'])->name('addJokeCategory');
+    Route::get('/jokesCatList', [App\Http\Controllers\Jokes::class, 'jokeListCat'])->name('joke-cat-list');
+    Route::post('/updateJokeCatStatus', [App\Http\Controllers\Jokes::class, 'updateJokeCatStatus'])->name('updateJokeCatStatus');
+
+        
 
     
 

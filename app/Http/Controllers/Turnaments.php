@@ -416,4 +416,36 @@ class Turnaments extends Controller
         }
     }
 
+    public function addRoom(Request $request){
+        if ($request->isMethod('post')) {
+         
+            $validator = Validator::make($request->all(),  [
+                'tour_id' => 'required',
+                'room_id' => 'required',
+                'pass' => 'required',
+            ]);
+            
+            if ($validator->fails()) {
+                return redirect('addRoom')
+                    ->withErrors($validator)
+                    ->withInput();
+            }
+
+            $tourData = [
+                'ROOM_ID' => $request->room_id,
+                'PASSWORD' => $request->pass
+            ];
+
+            $updateTour = Turnament::where('TOUR_ID', $request->tour_id)->update($tourData);
+            if ($updateTour) {
+                return redirect()->back()->withSuccess('Room Id and Password added Successfully!');
+            } else {
+                return view('tourRoomId');
+            }
+
+        }else{
+            return view('tourRoomId', ['tourData' => $request->tour_id]);
+        }
+    }
+
 }
